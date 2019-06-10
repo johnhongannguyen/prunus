@@ -9,6 +9,9 @@ var contentString =
 '<img src="https://66.media.tumblr.com/avatar_cc55c4a5c928_128.pnj" alt="Avatar" style="width:30px">' +
 '</div>';
 
+var geoQuery = null;
+var markers = [];
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         // center: {lat: -34.397, lng: 150.644},
@@ -31,6 +34,10 @@ function initMap() {
             infoWindow.setContent(contentString);
             infoWindow.open(map);
             map.setCenter(pos);
+
+
+            getTreesAround();
+
         }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
         });
@@ -66,7 +73,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
                 infoWindow.setContent(contentString);
 
-
             }, function() {
                 handleLocationError(true, infoWindow, map.getCenter());
             });
@@ -76,44 +82,72 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         }
     }
 
-    function plotStuff() {
+    function getTreesAround(){
 
-        /**
-        *   ICONS MUST COME FROM A URL
-        **/
-        var iconBase = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
+        if(geoQuery != null){
+            geoQuery.cancel();
+        }
 
-        var icons = {
-            cherry1: {
-                 icon: iconBase + 'info-i_maps.png'
-            },
-            cherry2: {
-                 icon: iconBase + 'info-i_maps.png'
-            }
-        };
+        clearMarkers();
 
-        var features = [
-            {
-                position: new google.maps.LatLng(49.2417605,-123.1148133),
-                type: 'cherry1'
-            }, {
-                position: new google.maps.LatLng(49.2389174,-123.106419),
-                type: 'cherry2'
-            }, {
-                position: new google.maps.LatLng(49.2350037,-123.1226642),
-                type: 'cherry1'
-            }
-        ];
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
 
-        // Create markers.
-        for (var i = 0; i < features.length; i++) {
-            var marker = new google.maps.Marker({
-                position: features[i].position,
-                icon: icons[features[i].type].icon,
-                map: map
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+
+                //remember to cancel this geoQuery later
+                geoQuery = treeLocationService.listenToNearbyTrees(
+                    [pos.lat, pos.lng],
+
+                    function(key, location, distance) {
+                        console.log(key + " entered query at " + location + " (" + distance + " km from center)");
+                        addMarker(location);
+
+                    },
+
+                    function(key, location, distance) {
+                        console.log(key + " exited query to " + location + " (" + distance + " km from center)");
+
+                    }
+                );
+
+
+            }, function() {
+                handleLocationError(true, infoWindow, map.getCenter());
             });
-        };
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
 
+    }
+
+    //Adds a single marker to the map. location -> [lat,lng]
+    function addMarker(location) {
+
+        var marker = new google.maps.Marker({
+            position: {
+                lat: location[0],
+                lng: location[1]
+            },
+            icon: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fsakura_tree_50px.png?alt=media&token=751530af-b889-49bd-b9e8-99feec7867a5",
+            map: map
+        });
+
+        markers.push(marker);
+    }
+
+    // Sets the map on all markers in the array.
+    function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
+
+        markers = [];
     }
 
 
