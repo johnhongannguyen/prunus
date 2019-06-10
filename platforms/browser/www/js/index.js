@@ -38,6 +38,10 @@ var app = {
 
         // Adds the initialization code in the init-preferences div:
         $("#init-preferences").load("init-preferences.html");
+
+        $(".camera-button").click(function(){
+            
+        })
         
     },
     // Update DOM on a Received Event
