@@ -26,13 +26,16 @@
     function clickPic() {
         let options = {
             quality: 80,
-            destinationType: Camera.DestinationType.FILE_URI,
+            // destinationType: Camera.DestinationType.FILE_URI,
+            destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.CAMERA,
+            // sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
             mediaType: Camera.MediaType.PICTURE,
             encodingType: Camera.EncodingType.JPEG,
             cameraDirection: Camera.Direction.BACK,
             targetWidth: 300,
-            targetHeight: 400
+            targetHeight: 400,
+            saveToPhotoAlbum: true
         }
 
         navigator.camera.getPicture(function(imageURI) {
@@ -40,7 +43,7 @@
             // $(".app").html("")
             appNavigator.loadPage("add-tree.html", function(responseTxt, statusTxt, xhr) {
                 if(statusTxt == "success")
-                $("#clicked-pic").attr("src",imageURI)
+                $("#clicked-pic").attr("src", "data:image/jpeg;base64," + imageURI)
                 if(statusTxt == "error")
                 alert("Error: " + xhr.status + ": " + xhr.statusText);
             })

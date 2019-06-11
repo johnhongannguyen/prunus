@@ -1,3 +1,4 @@
+
 var treeCRUD = {
 
     //latLng -> [-123,321])
@@ -13,7 +14,10 @@ var treeCRUD = {
         var geoFire = new geofire.GeoFire(firebaseRef);
 
 
-        addFileFirebase(file, function(snapshot){
+
+        addFileFirebase(randomKeyId, file, function(downloadURL){
+
+            console.log("downloadURL = " + downloadURL);
 
             //Writes the geoFire object in firebase:
             geoFire.set(randomKeyId, latLng)
@@ -24,33 +28,52 @@ var treeCRUD = {
                 var newTreeRef = firebaseRef.child(randomKeyId + "/tree")
 
                 .set({
-                    img_url: snapshot.downloadURL,
+                    img_url: downloadURL,
                     rating: rating,
                 });
             });
+        });
 
-        }
 
-    };
-
-    function addFileFirebase(name, file, callback){
-        // Create a root reference
-        var storageRef = firebase.storage().ref();
-
-        // Create a reference to 'images/name.jpg'
-        var r = storageRef.child('images/' + name + '.jpg');
-
-        ref.put(file).then(
-            function(snapshot) {
-                callback(snapshot);
-            },
-
-            function(error){
-                alert(""+error)
-            }
-        );
     }
 
+}
+
+function addFileFirebase(name, file, callback) {
+
+    var the_file = dataURLtoFile(file);
+
+
+    //Create a root reference
+    var storageRef = firebase.storage().ref();
+
+    // Create a reference to 'images/name.jpg'
+    var fileRef = storageRef.child('images/' + "tree" + name + '.jpeg');
+
+    fileRef.put(the_file).then(
+        function(snapshot) {
+
+            console.log("success!!!");
+
+            snapshot.ref.getDownloadURL().then(callback);
+        },
+
+        function(error){
+            console.log("fail");
+        }
+    );
+
+}
+
+
+function dataURLtoFile(dataurl) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], {type:mime});
+}
 
 
 
@@ -61,10 +84,4 @@ var treeCRUD = {
 
 
 
-
-
-
-
-
-
-    //.
+//.
