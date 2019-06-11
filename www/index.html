@@ -58,8 +58,12 @@ under the License.
 <script type="text/javascript" src="js/maps.js"></script>
 
 <script type="text/javascript">
-    $(".app").load("home.html")
-    app.initialize();
+    $(".app").load("home.html", function(responseTxt, statusTxt, xhr) {
+            if(statusTxt == "success")
+                app.initialize()
+            if(statusTxt == "error")
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
+        })
 </script>
 
 </html>
