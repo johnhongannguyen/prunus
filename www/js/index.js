@@ -39,6 +39,10 @@ var app = {
         // Adds the initialization code in the init-preferences div:
         $("#init-preferences").load("init-preferences.html");
 
+        $(".camera-button").click(function() {
+            clickPic()
+        })
+        
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -72,3 +76,35 @@ var app = {
     }
 
 };
+
+
+function clickPic() {
+    let options = {
+        quality: 80,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        mediaType: Camera.MediaType.PICTURE,
+        encodingType: Camera.EncodingType.JPEG,
+        cameraDirection: Camera.Direction.BACK,
+        targetWidth: 300,
+        targetHeight: 400
+    }
+
+    navigator.camera.getPicture(function(imageURI) {
+        //alert(imageURI)
+        // $(".app").html("")
+        $(".app").load("add-tree.html", function(responseTxt, statusTxt, xhr) {
+            if(statusTxt == "success")
+                $("#clicked-pic").attr("src",imageURI)        
+            if(statusTxt == "error")
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
+        })
+        
+        
+        // $("#msg").text(imageURI);
+        // $("#photo").attr("src", imageURI);
+    }, function(msg) {
+        //$("#msg").text(msg)
+        alert(msg)
+    }, options);
+}
