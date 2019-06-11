@@ -70,11 +70,10 @@
 
         alert("Image URL: " + $("#clicked-pic").attr("src") + "\nEmotions: " + emotions.join(", ") + "\nStatus: " + status + "\nLatitude: " +  lat + "\nLongitude: " + lng)
 
-        appNavigator.onBackPressed(function(responseTxt, statusTxt, xhr) {
-            if(statusTxt == "success")
-            initMap()
-            if(statusTxt == "error")
-            alert("Error: " + xhr.status + ": " + xhr.statusText);
+
+        treeCRUD.write($("#clicked-pic").attr("src"), 1, [lat,lng], function(){
+
+            appNavigator.onBackPressed();
         })
     })
 

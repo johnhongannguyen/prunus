@@ -8,18 +8,14 @@ var appNavigator = {
     //Use this method to open a new page for the app:
     loadPage: function(fileName, onPageLoadListener) {
 
-        $(".log").append(fileName);
-
-
         appNavigator.pagesStack.push(fileName);
         appNavigator.pagesStackListeners.push(onPageLoadListener);
 
         $(".app").load(fileName, onPageLoadListener);
     },
 
-    onBackPressed:function(onPageLoadListener){
-
-        $(".log").append("back " + appNavigator.pagesStack.length);
+    //Call this to close a page.
+    onBackPressed:function(){
 
         if(appNavigator.pagesStack.length == 1){
 
@@ -30,7 +26,33 @@ var appNavigator = {
             appNavigator.pagesStack.pop();
             appNavigator.pagesStackListeners.pop();
 
-            $(".app").load(appNavigator.pagesStack[appNavigator.pagesStack.length - 1], appNavigator.pagesStackListeners[appNavigator.pagesStack.length - 1], onPageLoadListener);
+            $(".app").load(
+                appNavigator.pagesStack[appNavigator.pagesStack.length - 1],
+                appNavigator.pagesStackListeners[appNavigator.pagesStack.length - 1]
+            );
+
+        }
+    },
+
+    //Call this to close a page;
+    //and do some operation upon navigating back to the previous.
+    //*** You will have to run the previous page's script again.
+    onBackPressed:function(onPageLoadListener){
+
+        if(appNavigator.pagesStack.length == 1){
+
+            navigator.app.exitApp();
+
+        } else {
+
+            appNavigator.pagesStack.pop();
+            appNavigator.pagesStackListeners.pop();
+
+            $(".app").load(
+                appNavigator.pagesStack[appNavigator.pagesStack.length - 1],
+                onPageLoadListener
+            );
+
         }
     }
 
