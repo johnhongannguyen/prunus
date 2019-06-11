@@ -49,16 +49,30 @@
 </div>
 
 <script>
+
+    var userPosition = null;
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            $("#lat").html(position.coords.latitude)
-            $("#lng").html(position.coords.longitude)
+            userPosition = position;
+
+            $("#lat").html(userPosition.coords.latitude)
+            $("#lng").html(userPosition.coords.longitude)
         })
     }
 
+    //Action will only work if the userPosition was determined.
     $("#plant-tree").click(function(){
+
+        if(userPosition == null){
+            alert("Waiting to retrieve user position.")
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+
         var emotions = [];
-        $.each($("input[name='emotion']:checked"), function(){            
+        $.each($("input[name='emotion']:checked"), function(){
             emotions.push($(this).val());
         });
 
@@ -69,11 +83,12 @@
 
         alert("Image URL: " + $("#clicked-pic").attr("src") + "\nEmotions: " + emotions.join(", ") + "\nStatus: " + status + "\nLatitude: " +  lat + "\nLongitude: " + lng)
 
-        $(".app").load("home.html", function(responseTxt, statusTxt, xhr) {
-            if(statusTxt == "success")
-                initMap() 
-            if(statusTxt == "error")
-                alert("Error: " + xhr.status + ": " + xhr.statusText);
+
+        treeCRUD.write($("#clicked-pic").attr("src"), 1, [userPosition.coords.latitude, userPosition.coords.longitude], function(){
+
+            appNavigator.onBackPressed();
         })
+
     })
+
 </script>

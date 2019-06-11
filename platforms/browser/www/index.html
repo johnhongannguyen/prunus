@@ -36,9 +36,8 @@ under the License.
 
 <body>
     <div class="app">
-        
+        <!-- home.html is loaded here initially -->
     </div>
-
 
     <div id="init-preferences">
         <!-- html & JS initialization code will be added here programmatically. -->
@@ -50,6 +49,7 @@ under the License.
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/tree-crud.js"></script>
 <script type="text/javascript" src="js/tree-location-service.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-storage.js"></script>
 
 <script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
 <script src="https://unpkg.com/rsvp@3.1.0/dist/rsvp.min.js"></script>
@@ -58,7 +58,8 @@ under the License.
 <script type="text/javascript" src="js/maps.js"></script>
 
 <script type="text/javascript">
-    $(".app").load("home.html", function(responseTxt, statusTxt, xhr) {
+
+    appNavigator.loadPage("home.html", function(responseTxt, statusTxt, xhr) {
             if(statusTxt == "success")
                 app.initialize()
             if(statusTxt == "error")
