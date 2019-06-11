@@ -29,26 +29,14 @@ under the License.
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
     <title>Prunus</title>
 </head>
 
 <body>
     <div class="app">
-        <div id="map">
-            <!-- Google map will be added here programmatically. -->
-        </div>
-
-        <div class="content">
-            <button onclick="myLocation()">My location</button>
-            <button onclick="getTreesAround()">Get trees around</button>
-        </div>
-
-        <div class="bottom-bar">
-            <div class="camera-button">
-                &nbsp;
-            </div>
-        </div>
+        
     </div>
 
 
@@ -66,10 +54,11 @@ under the License.
 <script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
 <script src="https://unpkg.com/rsvp@3.1.0/dist/rsvp.min.js"></script>
 
-<!-- This script configures the map. The map is added dinamically. -->
+<!-- This script configures the map. The map is added dynamically. -->
 <script type="text/javascript" src="js/maps.js"></script>
 
 <script type="text/javascript">
+    $(".app").load("home.html")
     app.initialize();
 </script>
 
