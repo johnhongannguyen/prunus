@@ -70,7 +70,7 @@
 
         alert("Image URL: " + $("#clicked-pic").attr("src") + "\nEmotions: " + emotions.join(", ") + "\nStatus: " + status + "\nLatitude: " +  lat + "\nLongitude: " + lng)
 
-        $(".app").load("home.html", function(responseTxt, statusTxt, xhr) {
+        appNavigator.onBackPressed(function(responseTxt, statusTxt, xhr) {
             if(statusTxt == "success")
             initMap()
             if(statusTxt == "error")

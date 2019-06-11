@@ -18,6 +18,7 @@
 
 <script>
     $(".camera-button").click(function() {
+
         clickPic();
     })
 
@@ -37,7 +38,7 @@
         navigator.camera.getPicture(function(imageURI) {
             //alert(imageURI)
             // $(".app").html("")
-            $(".app").load("add-tree.html", function(responseTxt, statusTxt, xhr) {
+            appNavigator.loadPage("add-tree.html", function(responseTxt, statusTxt, xhr) {
                 if(statusTxt == "success")
                 $("#clicked-pic").attr("src",imageURI)
                 if(statusTxt == "error")

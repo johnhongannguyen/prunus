@@ -1,21 +1,43 @@
-/*
-* Licensed to the Apache Software Foundation (ASF) under one
-* or more contributor license agreements.  See the NOTICE file
-* distributed with this work for additional information
-* regarding copyright ownership.  The ASF licenses this file
-* to you under the Apache License, Version 2.0 (the
-* "License"); you may not use this file except in compliance
-* with the License.  You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing,
-* software distributed under the License is distributed on an
-* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-* KIND, either express or implied.  See the License for the
-* specific language governing permissions and limitations
-* under the License.
-*/
+
+//Use this to open new pages in the app.
+//It holds a list of pages that are loaded in the main .app div.
+var appNavigator = {
+    pagesStack : [],
+    pagesStackListeners : [],
+
+    //Use this method to open a new page for the app:
+    loadPage: function(fileName, onPageLoadListener) {
+
+        $(".log").append(fileName);
+
+
+        appNavigator.pagesStack.push(fileName);
+        appNavigator.pagesStackListeners.push(onPageLoadListener);
+
+        $(".app").load(fileName, onPageLoadListener);
+    },
+
+    onBackPressed:function(onPageLoadListener){
+
+        $(".log").append("back " + appNavigator.pagesStack.length);
+
+        if(appNavigator.pagesStack.length == 1){
+
+            navigator.app.exitApp();
+
+        } else {
+
+            appNavigator.pagesStack.pop();
+            appNavigator.pagesStackListeners.pop();
+
+            $(".app").load(appNavigator.pagesStack[appNavigator.pagesStack.length - 1], appNavigator.pagesStackListeners[appNavigator.pagesStack.length - 1], onPageLoadListener);
+        }
+    }
+
+};
+
+
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -39,6 +61,8 @@ var app = {
         // Adds the initialization code in the init-preferences div:
         $("#init-preferences").load("init-preferences.html");
 
+
+        document.addEventListener("backbutton", appNavigator.onBackPressed);
         // document.addEventListener("backbutton", function(e){
         //
         // }, false);
