@@ -5,20 +5,7 @@
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d46e6fd-cac7-44aa-94e4-d189578e3047" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../browser/browser.json" beforeDir="false" afterPath="$PROJECT_DIR$/../browser/browser.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../browser/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/../browser/platform_www/cordova_plugins.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../browser/www/add-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/../browser/www/add-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../browser/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/../browser/www/cordova_plugins.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../browser/www/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/../browser/www/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../browser/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../browser/www/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../browser/www/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../browser/www/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../browser/www/js/tree-crud.js" beforeDir="false" afterPath="$PROJECT_DIR$/../browser/www/js/tree-crud.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/browser.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/browser.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/fetch.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/fetch.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/js/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="5d46e6fd-cac7-44aa-94e4-d189578e3047" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,7 +230,7 @@
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" />
-      <window_info anchor="bottom" id="Logcat" order="1" visible="true" weight="0.54038996" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.54038996" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Find" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" />
