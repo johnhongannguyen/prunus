@@ -32,13 +32,7 @@ platforms/ios/cordova/console.log
 *.xcuserdatad
 
 # Android Platform
-platforms/android/.gradle
-platforms/android/build
-platforms/android/assets/www
-platforms/android/local.properties
-platforms/android/CordovaLib/build
-platforms/android/CordovaLib/gen
-platforms/android/CordovaLib/local.properties
+platforms/android/*
 
 # wp8
 platforms/wp8/bin
