@@ -37,7 +37,7 @@ var appNavigator = {
     //Call this to close a page;
     //and do some operation upon navigating back to the previous.
     //*** You will have to run the previous page's script again.
-    onBackPressed:function(onPageLoadListener){
+    onBackPressedResult:function(onPageLoadListener){
 
         if(appNavigator.pagesStack.length == 1){
 
@@ -83,11 +83,7 @@ var app = {
         // Adds the initialization code in the init-preferences div:
         $("#init-preferences").load("init-preferences.html");
 
-
-        document.addEventListener("backbutton", appNavigator.onBackPressed);
-        // document.addEventListener("backbutton", function(e){
-        //
-        // }, false);
+        document.addEventListener("backbutton", appNavigator.onBackPressed, false);
 
     },
     // Update DOM on a Received Event
