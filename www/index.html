@@ -1,72 +1,93 @@
 <!DOCTYPE html>
-<!--
-Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
-
-Licensed to the Apache Software Foundation (ASF) under one
-or more contributor license agreements.  See the NOTICE file
-distributed with this work for additional information
-regarding copyright ownership.  The ASF licenses this file
-to you under the Apache License, Version 2.0 (the
-"License"); you may not use this file except in compliance
-with the License.  You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing,
-software distributed under the License is distributed on an
-"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, either express or implied.  See the License for the
-specific language governing permissions and limitations
-under the License.
--->
 <html>
 
 <head>
     <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" /> -->
+    <!-- Old one before framework7 (MAP WORKS ON PHONE) (But font issue)-->
     <meta http-equiv="Content-Security-Policy" content="default-src *; img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
 
+    <!-- This one no font issue, but map dosent work -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="font-src 'self' data:; default-src *; img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *"> -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#2196f3">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
 
     <title>Prunus</title>
+
+    <link rel="stylesheet" href="framework7/css/framework7.bundle.min.css">
+    <link rel="stylesheet" href="css/icons.css">
 </head>
 
 <body>
-    <div class="app">
-        <!-- home.html is loaded here initially -->
-    </div>
 
-    <div id="init-preferences">
-        <!-- html & JS initialization code will be added here programmatically. -->
-    </div>
-</body>
 
-<script src="js/jquery.js"></script>
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="js/tree-crud.js"></script>
-<script type="text/javascript" src="js/tree-location-service.js"></script>
+    <div id="app">
+        <!-- Status bar overlay for fullscreen mode-->
+        <div class="statusbar"></div>
 
-<script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
-<script src="https://unpkg.com/rsvp@3.1.0/dist/rsvp.min.js"></script>
+        <div class="view view-main safe-areas">
 
-<!-- This script configures the map. The map is added dynamically. -->
-<script type="text/javascript" src="js/maps.js"></script>
+            <!-- HOME (MAP) -->
+            <div class="page" data-name="home">
 
-<script type="text/javascript">
+                <!-- HOME PAGE IS LOADED HERE (pages/home.html) -->
+                <!-- All other pages uses routing navigation -->
 
-    appNavigator.loadPage("home.html", function(responseTxt, statusTxt, xhr) {
-            if(statusTxt == "success")
-                app.initialize()
-            if(statusTxt == "error")
-                alert("Error: " + xhr.status + ": " + xhr.statusText);
-        })
-</script>
+            </div>
+            <!-- END OF HOME (MAP) -->
+
+        </div>
+
+
+        <div id="init-preferences">
+            <!-- html & JS initialization code will be added here programmatically. -->
+        </div>
+
+    </body>
+
+    <script src="js/jquery.js"></script>
+
+    <!-- Framework7 library -->
+    <script src="framework7/js/framework7.bundle.min.js"></script>
+
+    <!-- App routes -->
+    <script src="js/routes.js"></script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/tree-crud.js"></script>
+    <script type="text/javascript" src="js/tree-location-service.js"></script>
+
+    <script src="https://cdn.firebase.com/libs/geofire/5.0.1/geofire.min.js"></script>
+    <script src="https://unpkg.com/rsvp@3.1.0/dist/rsvp.min.js"></script>
+
+    <!-- This script configures the map. The map is added dynamically. -->
+    <script type="text/javascript" src="js/maps.js"></script>
+
+
+
+    <script type="text/javascript">
+
+    $("#app .page").load("pages/home.html", function(responseTxt, statusTxt, xhr) {
+        if(statusTxt == "success"){
+            appConfig.initialize();
+        }
+
+        if(statusTxt == "error"){
+            alert("Error: " + xhr.status + ": " + xhr.statusText);
+        }
+
+    });
+
+    </script>
 
 </html>

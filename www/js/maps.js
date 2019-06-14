@@ -12,6 +12,9 @@ var contentString =
 var geoQuery = null;
 var markers = [];
 
+
+var pos;
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         // center: {lat: -34.397, lng: 150.644},
@@ -25,7 +28,7 @@ function initMap() {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
+            pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
@@ -104,13 +107,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                     [pos.lat, pos.lng],
 
                     function(key, location, distance) {
-                        console.log(key + " entered query at " + location + " (" + distance + " km from center)");
+                        // console.log(key + " entered query at " + location + " (" + distance + " km from center)");
                         addMarker(location);
 
                     },
 
                     function(key, location, distance) {
-                        console.log(key + " exited query to " + location + " (" + distance + " km from center)");
+                        // console.log(key + " exited query to " + location + " (" + distance + " km from center)");
 
                     }
                 );

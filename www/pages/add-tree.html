@@ -1,0 +1,211 @@
+<!-- SINGLE-FILE-COMPONENT -->
+<!-- https://framework7.io/docs/router-component.html#single-file-component -->
+
+<template>
+    <div class="page" data-name="add-tree">
+
+        <!-- <div class="parallax-div"> -->
+        <!-- Scrollable PAGE CONTENT-->
+        <div class="parallax-div page-content">
+            <img id="img-tree" src="{{tree.img}}" alt="Tree picture">
+
+            <div class="parallax-content elevation-8">
+                <div class="user-reaction">
+
+
+
+                    <!-- RATING -->
+                    <div class="field">
+                        <div class="flex-box">
+                            <label class="radio"><input type="radio" name="emotion" value="1"><i class="icon-radio"></i>Happy</label>
+                            <label class="radio"><input type="radio" name="emotion" value="2"><i class="icon-radio"></i>Amazed</label>
+                            <label class="radio"><input type="radio" name="emotion" value="3"><i class="icon-radio"></i>Stunned</label>
+                        </div>
+                    </div>
+
+
+                    <!-- STATUS -->
+                    <div class="field">
+                        <div class="flex-box">
+                            <span>Fully Bloomed</span>
+                            <span>Blossoming</span>
+                            <span>Growing</span>
+                        </div>
+
+                        <div class="item-input-wrap">
+                            <div class="range-slider range-slider-init" data-label="true">
+                                <input type="range" value="0" min="0" max="2" step="1">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- LOCATION -->
+                    <div class="field">
+                        <h2>Location info</h2>
+                        <div class="flex-box">
+                            <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
+                            <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
+                        </div>
+                    </div>
+
+
+                    <div class="action-bar">
+                        <button id="plant-tree">Submit</button>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<!-- component styles -->
+<style>
+
+    /* Spacing between each row: */
+    .field {
+        margin-bottom: 3rem;
+    }
+
+    /* centering radio buttons: */
+    .field .radio i {
+        margin:auto;
+    }
+
+    .parallax-div {
+        position: relative;
+    }
+
+    .parallax-content {
+        margin-top: 60vh;
+        position: absolute;
+        top:0;
+        left: 0;
+        right: 0;
+        /* top: 0; */
+    }
+
+    #img-tree {
+        position:relative;
+        width:100%;
+        height:60vh;
+
+        /* Keep aspect ratio and CLIP the image */
+        object-fit:cover;
+
+
+        transform:translate(0, -20px);
+    }
+
+    .flex-box {
+        display: flex;
+        justify-content: space-between
+    }
+
+    .user-reaction {
+        padding: 1rem;
+        background: #eee;
+
+        /* TODO - remove this */
+        padding-bottom: 300px;
+    }
+
+    .action-bar {
+        display: flex;
+        flex-direction: column
+    }
+
+    .action-bar button {
+        padding: 10px;
+        margin-top: 20px;
+    }
+</style>
+<!-- rest of component data and methods -->
+<script>
+    // script must return component object
+    return {
+
+        data: function () {
+            return {
+
+                tree: tree,    //This var is stored in index.js
+
+            }
+        },
+
+        on: {
+            pageInit: function () {
+                // do something on page init
+
+                console.log('add-tree initialized');
+
+                //Scroll listener for parallax:
+                $('.page-content').on('scroll', onScrollListener);
+
+                //Action will only work if the userPosition was determined.
+                $("#plant-tree").click(function(){
+
+
+
+
+                    var rating = 0;
+                    $.each($("input[name='emotion']:checked"), function(){
+                        rating = $(this).val();
+                    });
+
+                    rating = parseInt(rating);
+
+
+
+
+                    var blooming = $("input[type='range']").val();
+                    blooming = parseInt(blooming);
+
+
+
+                    treeCRUD.write(tree.img, rating, blooming, [tree.lat, tree.lng], function(){
+
+                        appNavigator.onBackPressed();
+                    })
+
+                });
+
+                ////////////////////////////////////////////////////////////////////////////
+                // PARALLAX
+                ////////////////////////////////////////////////////////////////////////////
+
+                adjustMarginTop();
+
+                function adjustMarginTop(){
+                    var mt = $(".parallax-content").css('margin-top');
+                    mt = parseFloat(mt.replace("px", "")) - 20;
+
+                    $(".parallax-content").css('margin-top', mt);
+                }
+
+                var lastScrollTop = 0;
+
+                function onScrollListener(){
+
+                    var scrollTop = this.scrollTop;
+
+                    var st = scrollTop;
+
+                    lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+
+                    if(st != 0){
+                        $('#img-tree').css("transform","translate(0, " + ((st/2.5) - 20) + "px)");
+                    } else{
+                        $('#img-tree').css("transform","translate(0, " + (-20) + "px)");
+                    }
+                }
+
+            },
+            pageAfterOut: function () {
+                // page has left the view
+            },
+        }
+    }
+</script>

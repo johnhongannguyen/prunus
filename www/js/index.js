@@ -1,69 +1,52 @@
+var $$ = Dom7;
+
+
+
+//Used to pass the picture src to the add-tree page.
+var tree;
+
+class Tree {
+    constructor(img, lat, lng) {
+          this.img = img;
+          this.lat = lat;
+          this.lng = lng;
+    }
+}
+
+
+
+
 
 //Use this to open new pages in the app.
 //It holds a list of pages that are loaded in the main .app div.
 var appNavigator = {
-    pagesStack : [],
-    pagesStackListeners : [],
 
-    //Use this method to open a new page for the app:
-    loadPage: function(fileName, onPageLoadListener) {
+    openPageAddTree: function(src, lat, lng) {
 
-        appNavigator.pagesStack.push(fileName);
-        appNavigator.pagesStackListeners.push(onPageLoadListener);
+        //Coordinates are stored in map.js (Will only work if it is active!!!)
+        tree = new Tree(src, lat, lng);
+        mainView.router.navigate('/add-tree/');
 
-        $(".app").load(fileName, onPageLoadListener);
     },
 
     //Call this to close a page.
     onBackPressed:function(){
 
-        if(appNavigator.pagesStack.length == 1){
-
+        if(mainView.history.length > 1){
+            mainView.router.back();
+        }else{
             navigator.app.exitApp();
-
-        } else {
-
-            appNavigator.pagesStack.pop();
-            appNavigator.pagesStackListeners.pop();
-
-            $(".app").load(
-                appNavigator.pagesStack[appNavigator.pagesStack.length - 1],
-                appNavigator.pagesStackListeners[appNavigator.pagesStack.length - 1]
-            );
-
-        }
-    },
-
-    //Call this to close a page;
-    //and do some operation upon navigating back to the previous.
-    //*** You will have to run the previous page's script again.
-    onBackPressedResult:function(onPageLoadListener){
-
-        if(appNavigator.pagesStack.length == 1){
-
-            navigator.app.exitApp();
-
-        } else {
-
-            appNavigator.pagesStack.pop();
-            appNavigator.pagesStackListeners.pop();
-
-            $(".app").load(
-                appNavigator.pagesStack[appNavigator.pagesStack.length - 1],
-                onPageLoadListener
-            );
-
         }
     }
-
 };
 
-
-
-var app = {
+var appConfig = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+
+        initializeFramework7();
+
     },
     // Bind Event Listeners
     //
@@ -78,7 +61,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 
-        app.receivedEvent('deviceready');
+        appConfig.receivedEvent('deviceready');
 
         // Adds the initialization code in the init-preferences div:
         $("#init-preferences").load("init-preferences.html");
@@ -116,5 +99,24 @@ var app = {
         //    treeCRUD.write("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/view-of-cherry-blossom-trees-on-road-royalty-free-image-957939640-1553531944.jpg?crop=0.563xw:1.00xh;0.229xw,0&resize=640:*",
         //     4, [49.231820, -123.159276]);
     }
-
 };
+
+var app;
+var mainView;
+
+function initializeFramework7(){
+    // Framework7 App main instance
+    app  = new Framework7({
+        root: '#app', // App root element
+
+        theme: 'auto', // Automatic theme detection
+
+        // App routes
+        routes: routes
+    });
+
+    // Init/Create main view
+    mainView = app.views.create('.view-main', {
+        url: '/'
+    });
+}
