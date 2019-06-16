@@ -1,0 +1,220 @@
+<!-- SINGLE-FILE-COMPONENT -->
+<!-- https://framework7.io/docs/router-component.html#single-file-component -->
+
+<template>
+    <div class="page" data-name="add-tree">
+
+        <!-- Scrollable PAGE CONTENT-->
+        <div class="page-content">
+
+            <div id='container'>
+                <div id="group1">
+
+                    <div class="background">
+                        <img id="img-tree" src="{{tree.img}}" alt="Tree picture">
+                    </div>
+
+                    <div class="foreground user-reaction elevation-12">
+                        <!-- RATING -->
+                        <div class="field">
+                            <div class="flex-box">
+                                <label class="radio"><input type="radio" name="emotion" value="1"><i class="icon-radio"></i>Happy</label>
+                                <label class="radio"><input type="radio" name="emotion" value="2"><i class="icon-radio"></i>Amazed</label>
+                                <label class="radio"><input type="radio" name="emotion" value="3"><i class="icon-radio"></i>Stunned</label>
+                            </div>
+                        </div>
+
+
+                        <!-- STATUS -->
+                        <div class="field">
+                            <div class="flex-box">
+                                <span>Fully Bloomed</span>
+                                <span>Blossoming</span>
+                                <span>Growing</span>
+                            </div>
+
+                            <div class="item-input-wrap">
+                                <div class="range-slider range-slider-init" data-label="true">
+                                    <input type="range" value="0" min="0" max="2" step="1">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- LOCATION -->
+                        <div class="field">
+                            <h2>Location info</h2>
+                            <div class="flex-box">
+                                <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
+                                <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
+                            </div>
+                        </div>
+
+
+                        <div class="action-bar">
+                            <button id="btn-register-tree">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</template>
+<!-- component styles -->
+<style>
+
+    /* PARALLAX START ////////////////////////////////////////// */
+    div {
+        box-sizing: border-box;
+    }
+
+    #container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        perspective: 1px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    #group1 {
+        position: relative;
+        transform-style: preserve-3d;
+    }
+
+    .background {
+
+        /* CHANGE THE SCALE TO FIT... */
+        transform: translateZ(-1px) scale(3);
+        width: 100%;
+        position: absolute;
+
+        /* CHANGE THIS TO MOVE THE IMG */
+        top: calc(-22vh);
+
+        /* left: calc(-50vw); */
+        background: #FFF;
+    }
+
+    .foreground {
+        position: absolute;
+        top: 60vh;
+        width: 100%;
+    }
+
+    .background img {
+        max-height:60vh;
+        width: 100%;
+        object-fit: cover;
+    }
+    /* PARALLAX END ////////////////////////////////////////// */
+
+
+    .user-reaction {
+        padding: 1rem;
+        background: #eee;
+
+        /* TODO - remove this */
+        padding-bottom: 200px;
+    }
+
+
+    /* Spacing between each row: */
+    .field {
+        margin-bottom: 3rem;
+    }
+
+    /* centering radio buttons: */
+    .field .radio i {
+        margin:auto;
+    }
+
+    .flex-box {
+        display: flex;
+        justify-content: space-between
+    }
+
+    .action-bar {
+        display: flex;
+        flex-direction: column
+    }
+
+    .action-bar button {
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+
+    @media screen and (min-width:900px) {
+        .foreground {
+            top: 80vh;
+        }
+
+        .background img {
+            max-height:80vh;
+        }
+    }
+
+</style>
+<!-- rest of component data and methods -->
+<script>
+    // script must return component object
+    return {
+
+        data: function () {
+            return {
+
+                tree: tree,    //This var is stored in index.js
+
+            }
+        },
+
+        on: {
+            pageInit: function () {
+                // do something on page init
+
+                console.log('add-tree initialized');
+
+
+                //SUBMIT CLICK:
+                $("#btn-register-tree").click(function(){
+
+
+
+                    //rating
+                    var rating = 0;
+                    $.each($("input[name='emotion']:checked"), function(){
+                        rating = $(this).val();
+                    });
+                    rating = parseInt(rating);
+
+
+
+                    //blooming status
+                    var blooming = $("input[type='range']").val();
+                    blooming = parseInt(blooming);
+
+
+                    // Show preloader before Ajax request
+                    app.preloader.show();
+
+                    //Save tree:
+                    treeCRUD.write(tree.img, rating, blooming, [tree.lat, tree.lng], function(){
+
+                        app.preloader.hide();
+                        appNavigator.onBackPressed();
+                    })
+
+                });
+
+            },
+            pageAfterOut: function () {
+                // page has left the view
+            },
+        }
+    }
+</script>

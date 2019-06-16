@@ -1,0 +1,90 @@
+<!-- HOME MAP SCREEN -->
+
+<!-- TOOLBAR -->
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="link icon-only panel-open" data-panel="left">
+                <i class="icon f7-icons ios-only">menu</i>
+                <i class="icon material-icons md-only">menu</i>
+            </a>
+        </div>
+        <div class="title sliding">My App</div>
+        <div class="right">
+            <a href="#" class="link icon-only panel-open" data-panel="right">
+                <i class="icon f7-icons ios-only">menu</i>
+                <i class="icon material-icons md-only">menu</i>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- END OF TOOLBAR -->
+
+<!-- Scrollable PAGE CONTENT-->
+<div class="page-content">
+
+    <div class="app">
+
+        <div id="map">
+            <!-- Google map will be added here programmatically. -->
+        </div>
+
+        <div class="content">
+            <button onclick="myLocation()">My location</button>
+            <button onclick="getTreesAround()">Get trees around</button>
+        </div>
+
+        <div class="bottom-bar">
+            <div class="camera-button">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OF PAGE CONTENT -->
+
+
+<script>
+
+    //todo - remove this
+    $('.page .left a').click(function(){
+        appNavigator.openPageAddTree('img/test.png', pos.lat, pos.lng);
+    });
+
+
+    $(".camera-button").click(function() {
+
+        clickPic();
+    })
+
+    //Opens the camera:
+    function clickPic() {
+        let options = {
+            quality: 80,
+            // destinationType: Camera.DestinationType.FILE_URI,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            // sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+            mediaType: Camera.MediaType.PICTURE,
+            encodingType: Camera.EncodingType.JPEG,
+            cameraDirection: Camera.Direction.BACK,
+            targetWidth: 300,
+            targetHeight: 400
+            // saveToPhotoAlbum: true
+        }
+
+        navigator.camera.getPicture(function(imageURI) {
+
+            //Success:
+            appNavigator.openPageAddTree("data:image/jpeg;base64," + imageURI, pos.lat, pos.lng);
+
+
+        }, function(msg) {
+
+            //Error:
+
+            alert(msg)
+
+        }, options);
+    }
+</script>
