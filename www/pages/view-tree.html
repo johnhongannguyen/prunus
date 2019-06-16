@@ -2,65 +2,66 @@
 <!-- https://framework7.io/docs/router-component.html#single-file-component -->
 
 <template>
-        <div class="page" data-name="view-tree">
-    
-            <!-- Scrollable PAGE CONTENT-->
-            <div class="page-content">
-    
-                    <div id='container'>
-                            <div id="group1">
-            
-                                <div class="background">
-                                    <img id="img-tree" src="{{tree.img_url}}" alt="Tree picture">
-                                </div>
-            
-                                <div class="foreground user-reaction elevation-12">
-                                    <!-- RATING -->
-                                    <div class="field">
-                                        <div class="flex-box">
-                                            <label class="radio"><input type="radio" name="emotion" value="1" checked={{tree.ratingCheck(1)}}><i class="icon-radio"></i>Happy</label>
-                                            <label class="radio"><input type="radio" name="emotion" value="2" checked={{tree.ratingCheck(2)}}><i class="icon-radio"></i>Amazed</label>
-                                            <label class="radio"><input type="radio" name="emotion" value="3" checked={{tree.ratingCheck(3)}}><i class="icon-radio"></i>Stunned</label>
-                                        </div>
-                                    </div>
-            
-            
-                                    <!-- STATUS -->
-                                    <div class="field">
-                                        <div class="flex-box">
-                                            <span>Fully Bloomed</span>
-                                            <span>Blossoming</span>
-                                            <span>Growing</span>
-                                        </div>
-            
-                                        <div class="item-input-wrap">
-                                            <div class="range-slider range-slider-init" data-label="true">
-                                                <input type="range" value="{{tree.blooming}}" min="0" max="2" step="1">
-                                            </div>
-                                        </div>
-                                    </div>
-            
-            
-                                    <!-- LOCATION -->
-                                    <div class="field">
-                                        <h2>Location info</h2>
-                                        <div class="flex-box">
-                                            <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
-                                            <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
-                                        </div>
-                                    </div>
+    <div class="page" data-name="view-tree">
+
+        <!-- Scrollable PAGE CONTENT-->
+        <div class="page-content">
+
+            <div id='container'>
+                <div id="group1">
+
+                    <div class="background">
+                        <img id="img-tree" src="{{tree.img_url}}" alt="Tree picture">
+                    </div>
+
+                    <div class="foreground user-reaction elevation-12">
+                        <!-- RATING -->
+                        <div class="field">
+                            <div class="flex-box">
+                                <label class="radio"><input type="radio" name="emotion" value="1" {{checkRating(1)}}><i class="icon-radio"></i>Happy</label>
+                                <label class="radio"><input type="radio" name="emotion" value="2" {{checkRating(2)}}><i class="icon-radio"></i>Amazed</label>
+                                <label class="radio"><input type="radio" name="emotion" value="3" {{checkRating(3)}}><i class="icon-radio"></i>Stunned</label>
+                            </div>
+                        </div>
+
+
+                        <!-- STATUS -->
+                        <div class="field">
+                            <div class="flex-box">
+                                <span>Growing</span>
+                                <span>Blossoming</span>                            
+                                <span>Fully Bloomed</span>
+                            </div>
+
+                            <!-- Value is being set programmatically -->
+                            <div class="item-input-wrap">
+                                <div id="slider-view-tree" class="range-slider range-slider-init" data-label="true">
+                                    <input type="range" min="0" max="2" step="1">
                                 </div>
                             </div>
                         </div>
-               
+
+
+                        <!-- LOCATION -->
+                        <div class="field">
+                            <h2>Location info</h2>
+                            <div class="flex-box">
+                                <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
+                                <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
-    
-    </template>
-    <!-- component styles -->
-    <style>
-    
+
+    </div>
+
+</template>
+<!-- component styles -->
+<style>
+
     .user-reaction {
         padding: 1rem;
         background: #eee;
@@ -94,38 +95,43 @@
             max-height:80vh;
         }
     }
-    
-    </style>
-    <!-- rest of component data and methods -->
-    <script>
-        // script must return component object
-        return {
-    
-            data: function () {
-                return {
-    
-                    treeID: id,    //This var is stored in index.js
-                    tree: new Tree(),
 
+</style>
+<!-- rest of component data and methods -->
+<script>
+    // script must return component object
+    return {
+
+        data: function () {
+            return {
+
+                treeID: id,    //This var is stored in index.js
+                tree: new Tree(),
+
+                checkRating: function(v){
+
+                    return (v == this.tree.rating) ? "checked" : ""
                 }
-            },
-    
-            on: {
-                pageInit: function () {
-                    // do something on page init
-                    var self = this;
-                    console.log('view-tree initialized');
-                    
-                    treeCRUD.read(this.treeID, function(result) {
-                        self.tree = result;
-                        self.$setState();
-                    })
-    
-                },
-                pageAfterOut: function () {
-                    // page has left the view
-                },
             }
+        },
+
+        on: {
+            pageInit: function () {
+                // do something on page init
+                var self = this;
+                console.log('view-tree initialized');
+
+                treeCRUD.read(this.treeID, function(result) {
+                    self.tree = result;
+                    self.$setState();
+
+                    app.range.get('.range-slider').setValue(self.tree.blooming);
+                })
+
+            },
+            pageAfterOut: function () {
+                // page has left the view
+            },
         }
-    </script>
-    
+    }
+</script>

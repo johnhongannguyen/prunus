@@ -13,9 +13,6 @@ class Tree {
           this.lng = lng;
           this.blooming = blooming;
           this.rating = rating;
-          this.ratingCheck = function(ratingVal) {
-            return ratingVal == this.rating;
-          }
     }
 }
 
