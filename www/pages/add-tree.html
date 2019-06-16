@@ -199,9 +199,13 @@
                     blooming = parseInt(blooming);
 
 
+                    // Show preloader before Ajax request
+                    app.preloader.show();
+
                     //Save tree:
                     treeCRUD.write(tree.img, rating, blooming, [tree.lat, tree.lng], function(){
 
+                        app.preloader.hide();
                         appNavigator.onBackPressed();
                     })
 
