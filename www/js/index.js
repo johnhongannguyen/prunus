@@ -4,12 +4,18 @@ var $$ = Dom7;
 
 //Used to pass the picture src to the add-tree page.
 var tree;
+var id;
 
 class Tree {
-    constructor(img, lat, lng) {
-          this.img = img;
+    constructor(img, lat, lng, blooming, rating) {
+          this.img_url = img;
           this.lat = lat;
           this.lng = lng;
+          this.blooming = blooming;
+          this.rating = rating;
+          this.ratingCheck = function(ratingVal) {
+            return ratingVal == this.rating;
+          }
     }
 }
 
@@ -27,6 +33,11 @@ var appNavigator = {
         tree = new Tree(src, lat, lng);
         mainView.router.navigate('/add-tree/');
 
+    },
+
+    openPageViewTree: function(key) {
+        id = key
+        mainView.router.navigate('/view-tree/');
     },
 
     //Call this to close a page.

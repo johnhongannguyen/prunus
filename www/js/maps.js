@@ -108,7 +108,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
                     function(key, location, distance) {
                         // console.log(key + " entered query at " + location + " (" + distance + " km from center)");
-                        addMarker(location);
+                        addMarker(key, location);
 
                     },
 
@@ -130,7 +130,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     }
 
     //Adds a single marker to the map. location -> [lat,lng]
-    function addMarker(location) {
+    function addMarker(key, location) {
 
         var marker = new google.maps.Marker({
             position: {
@@ -139,6 +139,12 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
             },
             icon: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fsakura_tree_50px.png?alt=media&token=751530af-b889-49bd-b9e8-99feec7867a5",
             map: map
+        });
+
+        //Segue to View Tree
+        marker.addListener('click', function() {
+            //Method to handle transition to the View Tree screen
+            appNavigator.openPageViewTree(key)
         });
 
         markers.push(marker);
@@ -152,7 +158,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
         markers = [];
     }
-
 
 
 

@@ -11,7 +11,7 @@
                 <div id="group1">
 
                     <div class="background">
-                        <img id="img-tree" src="{{tree.img}}" alt="Tree picture">
+                        <img id="img-tree" src="{{tree.img_url}}" alt="Tree picture">
                     </div>
 
                     <div class="foreground user-reaction elevation-12">
@@ -63,57 +63,8 @@
 
 </template>
 <!-- component styles -->
+
 <style>
-
-    /* PARALLAX START ////////////////////////////////////////// */
-    div {
-        box-sizing: border-box;
-    }
-
-    #container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        perspective: 1px;
-        overflow-x: hidden;
-        overflow-y: scroll;
-    }
-
-    #group1 {
-        position: relative;
-        transform-style: preserve-3d;
-    }
-
-    .background {
-
-        /* CHANGE THE SCALE TO FIT... */
-        transform: translateZ(-1px) scale(3);
-        width: 100%;
-        position: absolute;
-
-        /* CHANGE THIS TO MOVE THE IMG */
-        top: calc(-22vh);
-
-        /* left: calc(-50vw); */
-        background: #FFF;
-    }
-
-    .foreground {
-        position: absolute;
-        top: 60vh;
-        width: 100%;
-    }
-
-    .background img {
-        max-height:60vh;
-        width: 100%;
-        object-fit: cover;
-    }
-    /* PARALLAX END ////////////////////////////////////////// */
-
-
     .user-reaction {
         padding: 1rem;
         background: #eee;
@@ -203,7 +154,7 @@
                     app.preloader.show();
 
                     //Save tree:
-                    treeCRUD.write(tree.img, rating, blooming, [tree.lat, tree.lng], function(){
+                    treeCRUD.write(tree.img_url, rating, blooming, [tree.lat, tree.lng], function(){
 
                         app.preloader.hide();
                         appNavigator.onBackPressed();
