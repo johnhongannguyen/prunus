@@ -68,9 +68,10 @@
             mediaType: Camera.MediaType.PICTURE,
             encodingType: Camera.EncodingType.JPEG,
             cameraDirection: Camera.Direction.BACK,
-            targetWidth: 300,
-            targetHeight: 400
+            // targetWidth: 300,
+            // targetHeight: 400,
             // saveToPhotoAlbum: true
+            correctOrientation: true //Corrects Android orientation quirks
         }
 
         navigator.camera.getPicture(function(imageURI) {

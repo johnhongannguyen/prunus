@@ -114,7 +114,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
                     function(key, location, distance) {
                         // console.log(key + " exited query to " + location + " (" + distance + " km from center)");
-
+                        removeMarker(key);
                     }
                 );
 
@@ -138,7 +138,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 lng: location[1]
             },
             icon: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fsakura_tree_50px.png?alt=media&token=751530af-b889-49bd-b9e8-99feec7867a5",
-            map: map
+            map: map,
+            key_id: key
         });
 
         //Segue to View Tree
@@ -148,6 +149,17 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         });
 
         markers.push(marker);
+    }
+
+    function removeMarker(key){
+
+        markers.forEach(function(item, index){
+
+            if(item.key_id == key){
+                item.setMap(null);
+            }
+
+        });
     }
 
     // Sets the map on all markers in the array.
