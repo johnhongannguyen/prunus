@@ -10,6 +10,7 @@ routes = [
     {
         path: '/view-tree/',
         componentUrl: './pages/view-tree.html',
+
     },
 
     // Default route (404 page). MUST BE THE LAST

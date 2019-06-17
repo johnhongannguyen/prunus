@@ -18,9 +18,9 @@
                         <!-- RATING -->
                         <div class="field">
                             <div class="flex-box">
-                                <label class="radio"><input type="radio" name="emotion" value="1" {{checkRating(1)}}><i class="icon-radio"></i>Happy</label>
-                                <label class="radio"><input type="radio" name="emotion" value="2" {{checkRating(2)}}><i class="icon-radio"></i>Amazed</label>
-                                <label class="radio"><input type="radio" name="emotion" value="3" {{checkRating(3)}}><i class="icon-radio"></i>Stunned</label>
+                                <label class="radio"><input disabled type="radio" name="emotion" value="1" {{checkRating(1)}}><i class="icon-radio"></i>Happy</label>
+                                <label class="radio"><input disabled type="radio" name="emotion" value="2" {{checkRating(2)}}><i class="icon-radio"></i>Amazed</label>
+                                <label class="radio"><input disabled type="radio" name="emotion" value="3" {{checkRating(3)}}><i class="icon-radio"></i>Stunned</label>
                             </div>
                         </div>
 
@@ -29,7 +29,7 @@
                         <div class="field">
                             <div class="flex-box">
                                 <span>Growing</span>
-                                <span>Blossoming</span>                            
+                                <span>Blossoming</span>
                                 <span>Fully Bloomed</span>
                             </div>
 
@@ -105,7 +105,7 @@
         data: function () {
             return {
 
-                treeID: id,    //This var is stored in index.js
+                //This tree object will be filled after the firebase request:
                 tree: new Tree(),
 
                 checkRating: function(v){
@@ -121,11 +121,19 @@
                 var self = this;
                 console.log('view-tree initialized');
 
-                treeCRUD.read(this.treeID, function(result) {
-                    self.tree = result;
-                    self.$setState();
 
+                //Getting the ID for the tree from the router.
+                var id = mainView.router.currentRoute.context.key;
+
+
+                treeCRUD.read(id, function(result) {
+                    self.tree = result;    //Updating tree object
+                    self.$setState();      //Forcing the view to reset
+
+                    //Setting the value to the slider:
                     app.range.get('.range-slider').setValue(self.tree.blooming);
+
+                    app.range.get('.range-slider').params.draggableBar = false;
                 })
 
             },

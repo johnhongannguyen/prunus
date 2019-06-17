@@ -119,7 +119,7 @@
         data: function () {
             return {
 
-                tree: tree,    //This var is stored in index.js
+                tree: new Tree(),    //This var is stored in index.js
 
             }
         },
@@ -127,8 +127,11 @@
         on: {
             pageInit: function () {
                 // do something on page init
+                var self = this;
 
-                console.log('add-tree initialized');
+                //Getting the tree from the router:
+                self.tree = mainView.router.currentRoute.context.tree;
+                self.$setState();    //Forcing the view to reset
 
 
                 //SUBMIT CLICK:
@@ -154,7 +157,7 @@
                     app.preloader.show();
 
                     //Save tree:
-                    treeCRUD.write(tree.img_url, rating, blooming, [tree.lat, tree.lng], function(){
+                    treeCRUD.write(self.tree.img_url, rating, blooming, [self.tree.lat, self.tree.lng], function(){
 
                         app.preloader.hide();
                         appNavigator.onBackPressed();
