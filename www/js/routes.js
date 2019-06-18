@@ -13,6 +13,12 @@ routes = [
 
     },
 
+    {
+        path: '/login/',
+        componentUrl: './pages/login.html',
+
+    },
+
     // Default route (404 page). MUST BE THE LAST
     {
         path: '(.*)',

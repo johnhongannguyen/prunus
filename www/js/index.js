@@ -39,6 +39,11 @@ var appNavigator = {
         mainView.router.navigate('/view-tree/', options);
     },
 
+    openPageLogin: function() {
+
+        mainView.router.navigate('/login/');
+    },
+
     //Call this to close a page.
     onBackPressed:function(){
 
