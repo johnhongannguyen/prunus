@@ -1,6 +1,6 @@
 init-preferences.html
 
-
+node_modules/
 
 # Mac
 .DS_Store
