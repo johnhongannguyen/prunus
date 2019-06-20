@@ -97,6 +97,7 @@ var appConfig = {
     onFirebaseDatabaseInitialized: function() {
 
         console.log('Firebase database initialized');
+        auth.init();
     }
 };
 

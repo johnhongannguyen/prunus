@@ -7,9 +7,16 @@
         <!-- Scrollable PAGE CONTENT-->
         <div class="page-content">
 
+            <div id="user-container">
+                <img id="user-img" src="" alt="user-picture">
+                <input type="text" id="user-name" disabled>
+                <input type="text" id="user-email" value="r_none_l@hotmail.com" disabled>
+            </div>
+
+
             <button type="button" class="button" id="btnGoogle">Google</button>
             <button type="button" class="button" id="btnFacebook">Facebook</button>
-
+            <button type="button" class="button" id="btnLogout">Logout</button>
 
         </div>
 
@@ -19,7 +26,26 @@
 <!-- component styles -->
 <style>
 
+    #user-container {
+        display:flex;
+        flex-direction:column;
 
+        padding: 20px;        
+    }
+
+    #user-container > input{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    #user-img {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+        width: 50%;
+        border-radius: 50%;
+    }
 
 </style>
 <!-- rest of component data and methods -->
@@ -41,7 +67,48 @@
 
                 $("#btnGoogle").click(auth.loginWithGoogle);
                 $("#btnFacebook").click(auth.loginWithFacebook);
+                $("#btnLogout").click(auth.logout);
 
+                auth.setLoginListener(function(user){
+
+                    //If logged in, show logout button and hide the login buttons...
+                    if(user){
+                        $("#btnLogout").show();
+
+                        $("#btnGoogle").hide();
+                        $("#btnFacebook").hide();
+                    } else {
+                        $("#btnLogout").hide();
+
+                        $("#btnGoogle").show();
+                        $("#btnFacebook").show();
+                    }
+
+                    updateProfileLayout(user);
+
+                    // console.log(JSON.stringify(user));
+                });
+
+
+                function updateProfileLayout(user){
+                    if(user){
+
+                        //Show the container and all its children:
+                        $("#user-container").show();
+                        $("#user-container").children().show();
+
+                        //Set values to fields. (This "user" is the user-firebase object...)
+                        $("#user-img").attr("src", user.photoURL);
+                        $("#user-name").val(user.displayName);
+                        $("#user-email").val(user.email);
+
+                    }else{
+
+                        //Hide the container and all its children:
+                        $("#user-container").hide();
+                        $("#user-container").children().hide();
+                    }
+                }
 
             },
             pageAfterOut: function () {
