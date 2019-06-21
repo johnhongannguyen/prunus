@@ -14,8 +14,9 @@
             </div>
 
 
-            <button type="button" class="button" id="btnGoogle">Google</button>
             <button type="button" class="button" id="btnFacebook">Facebook</button>
+            <button type="button" class="button" id="btnGoogle">Google</button>
+
             <button type="button" class="button" id="btnLogout">Logout</button>
 
         </div>
@@ -30,7 +31,7 @@
         display:flex;
         flex-direction:column;
 
-        padding: 20px;        
+        padding: 20px;
     }
 
     #user-container > input{
@@ -65,9 +66,26 @@
                 // do something on page init
                 var self = this;
 
-                $("#btnGoogle").click(auth.loginWithGoogle);
-                $("#btnFacebook").click(auth.loginWithFacebook);
+                $("#btnGoogle").click(function () {
+                    auth.loginWithGoogle(function(error){
+                        if(error){
+                            //Something went wrong...
+                        }
+                    });
+                });
+
+                $("#btnFacebook").click(function (){
+                    auth.loginWithFacebook(function(error){
+                        if(error){
+                            //Something went wrong...
+                        }
+                    });
+                });
+
                 $("#btnLogout").click(auth.logout);
+
+
+
 
                 auth.setLoginListener(function(user){
 

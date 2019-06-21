@@ -50,7 +50,6 @@
                             </div>
                         </div>
 
-
                         <div class="action-bar">
                             <button id="btn-register-tree">Submit</button>
                         </div>
@@ -153,15 +152,85 @@
                     blooming = parseInt(blooming);
 
 
-                    // Show preloader before Ajax request
-                    app.preloader.show();
 
-                    //Save tree:
-                    treeCRUD.write(self.tree.img_url, rating, blooming, [self.tree.lat, self.tree.lng], function(){
+                    //Check if user is logged:
+                    if(auth.getCurrentUser()){
 
-                        app.preloader.hide();
-                        appNavigator.onBackPressed();
-                    })
+                        registerTree();
+
+                    } else {
+
+
+                        //If user not logged then do the login flow:
+
+                        var dialog = app.dialog.create({
+                            title: 'Login',
+                            text: 'Sign in to add the tree.',
+                            content: '<div class="dialog-input-field item-input" style="margin-top: 15px;"><button type="button" class="button" id="btnFacebook">Facebook</button><button type="button" class="button" id="btnGoogle">Google</button></div>',
+                            buttons: [
+                            {
+                                text: 'Cancel',
+                            },
+
+                            ],
+                            onClick(dialog, index) {
+
+                                if(index === 0){
+                                    dialog.close();
+                                }
+
+                                // const inputValue = dialog.$el.find('.dialog-input').val();
+                                // if (index === 0 && callbackCancel) callbackCancel(inputValue);
+                                // if (index === 1 && callbackOk) callbackOk(inputValue);
+                            },
+                            //verticalButtons: true,
+                            on: {
+                                open: function () {
+
+                                    $("#btnGoogle").click(function () {
+                                        auth.loginWithGoogle(function(error){
+                                            if(error){
+                                                //Something went wrong...
+                                            } else {
+                                                dialog.close();
+                                                registerTree();
+                                            }
+                                        });
+                                    });
+
+                                    $("#btnFacebook").click(function (){
+                                        auth.loginWithFacebook(function(error){
+                                            if(error){
+                                                //Something went wrong...
+                                            } else {
+                                                dialog.close();
+                                                registerTree();
+                                            }
+                                        });
+                                    });
+
+                                } //End open:
+
+                            }    //End on:
+
+                        }).open();
+
+
+                    } //End else
+
+
+
+
+                    function registerTree(){
+                        //If user is logged save the tree:
+                        app.preloader.show();
+
+                        treeCRUD.write(auth.getCurrentUser(), self.tree.img_url, rating, blooming, [self.tree.lat, self.tree.lng], function(){
+
+                            app.preloader.hide();
+                            appNavigator.onBackPressed();
+                        });
+                    }
 
                 });
 
