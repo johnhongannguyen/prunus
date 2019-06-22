@@ -2,16 +2,23 @@ var $$ = Dom7;
 
 
 class Tree {
-    constructor(img, lat, lng, blooming, rating) {
+    constructor(img, lat, lng, blooming, rating, user) {
         this.img_url = img;
         this.lat = lat;
         this.lng = lng;
         this.blooming = blooming;
         this.rating = rating;
+        this.user = user
     }
 }
 
-
+class User {
+    constructor(uid, photoURL, displayName) {
+        this.uid = uid;
+        this.photoURL = photoURL;
+        this.displayName = displayName;
+    }
+}
 
 //Use this to open new pages in the app.
 var appNavigator = {
