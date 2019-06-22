@@ -45,12 +45,10 @@ function initMap() {
                 map: map
             });
 
-            // markers.push(marker)
             // infoWindow.setPosition(pos);
             // infoWindow.setContent(contentString);
             // infoWindow.open(map);
             map.setCenter(pos);
-
 
             getTreesAround();
 
