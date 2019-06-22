@@ -36,7 +36,12 @@ function initMap() {
 
             var marker = new google.maps.Marker({
                 position: pos,
-                icon: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fmy_location_icon_30px.png?alt=media&token=beb01b67-e15c-4d60-a01b-47e7781f929c",
+                icon: {
+                    // size: new google.maps.Size(10, 10),
+                    scaledSize: new google.maps.Size(25,28),
+                    url: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fmy_location_91x104.png?alt=media&token=ff826d46-91bf-4fea-9af3-13147f13382f"
+                },
+                zIndex: 1,
                 map: map
             });
 
@@ -80,7 +85,12 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
                 var marker = new google.maps.Marker({
                     position: pos,
-                    icon: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fmy_location_icon_30px.png?alt=media&token=beb01b67-e15c-4d60-a01b-47e7781f929c",
+                    icon: {
+                        // size: new google.maps.Size(10, 10),
+                        scaledSize: new google.maps.Size(25,28),
+                        url: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fmy_location_91x104.png?alt=media&token=ff826d46-91bf-4fea-9af3-13147f13382f"
+                    },
+                    zIndex: 1,
                     map: map
                 });
 
@@ -154,9 +164,15 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 lat: location[0],
                 lng: location[1]
             },
-            icon: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fprunus_geometric_25px.png?alt=media&token=237e1db2-0a46-4ed5-be7d-0210d081702f",
+            icon: {
+                // size: new google.maps.Size(10, 10),
+                scaledSize: new google.maps.Size(25,25),
+                url: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic_tree_pin.png?alt=media&token=86ede326-7f78-4196-a6a2-9d34a484b9c4"
+            },
+            zIndex: 0,
             map: map,
-            key_id: key
+
+            key_id: key //Extra property added to the icon object.
         });
 
         //Segue to View Tree
