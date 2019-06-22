@@ -14,6 +14,18 @@
     to { opacity: 1.0; }
 }
 
+@font-face {
+    font-family: 'CallieHand';
+    src: url('../fonts/callie-hand.woff2') format('woff2')
+  }
+
+.title {
+    font-family: CallieHand;
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+}
+
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
@@ -29,13 +41,19 @@ html, body {
 .app {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    background-image: linear-gradient(#db2763, #f5d0c5);
 }
 
 #map {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 77.5vh;
+    margin: 12.5vh 5% 10vh 5%;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
 }
 
 .content {
@@ -46,22 +64,42 @@ html, body {
     margin-right: 20px;
 }
 
+.nav-bar {
+    background-color: transparent !important;
+    border-bottom: 0px !important;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+}
+
+.icons {
+    padding: 23.5px;
+}
+
 .bottom-bar {
     bottom: 0px;
     right:0px;
     left:0px;
     height: 75px;
     position: absolute;
-    background-color: black;
+    background-color: transparent;
     border-top: 1px solid #9e9e9e
 }
 
 .camera-button {
+    position: absolute;
     margin: 5px auto;
     height: 65px;
     width: 65px;
-    background-color: white;
+    background-color: black;
     border-radius: 50%;
-    border: 3px solid grey;
+    /* border: 3px solid grey; */
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: calc(10vh - 32.5px);
+    right:0px;
+    left:0px;
 }

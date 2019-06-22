@@ -5,9 +5,10 @@
 var map, infoWindow;
 
 var contentString =
-'<div id="content-my-location">'+
-'<img src="https://66.media.tumblr.com/avatar_cc55c4a5c928_128.pnj" alt="Avatar" style="width:30px">' +
-'</div>';
+// '<div id="content-my-location">'+
+// '<img src="https://66.media.tumblr.com/avatar_cc55c4a5c928_128.pnj" alt="Avatar" style="width:30px">' +
+// '</div>';
+'<img src="https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fmy_location_icon_30px.png?alt=media&token=beb01b67-e15c-4d60-a01b-47e7781f929c" alt="Avatar" style="width:30px">'
 
 var geoQuery = null;
 var markers = [];
@@ -33,9 +34,16 @@ function initMap() {
                 lng: position.coords.longitude
             };
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(contentString);
-            infoWindow.open(map);
+            var marker = new google.maps.Marker({
+                position: pos,
+                icon: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fmy_location_icon_30px.png?alt=media&token=beb01b67-e15c-4d60-a01b-47e7781f929c",
+                map: map
+            });
+
+            // markers.push(marker)
+            // infoWindow.setPosition(pos);
+            // infoWindow.setContent(contentString);
+            // infoWindow.open(map);
             map.setCenter(pos);
 
 
@@ -69,12 +77,21 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                     lng: position.coords.longitude
                 };
 
-                infoWindow.setPosition(pos);
-                infoWindow.open(map);
+
+                var marker = new google.maps.Marker({
+                    position: pos,
+                    icon: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fmy_location_icon_30px.png?alt=media&token=beb01b67-e15c-4d60-a01b-47e7781f929c",
+                    map: map
+                });
+
+                // markers.push(marker)
+
+                // infoWindow.setPosition(pos);
+                // infoWindow.open(map);
                 map.setCenter(pos);
 
 
-                infoWindow.setContent(contentString);
+                // infoWindow.setContent(contentString);
 
             }, function() {
                 handleLocationError(true, infoWindow, map.getCenter());
@@ -137,7 +154,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 lat: location[0],
                 lng: location[1]
             },
-            icon: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fsakura_tree_50px.png?alt=media&token=751530af-b889-49bd-b9e8-99feec7867a5",
+            icon: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fprunus_geometric_25px.png?alt=media&token=237e1db2-0a46-4ed5-be7d-0210d081702f",
             map: map,
             key_id: key
         });
