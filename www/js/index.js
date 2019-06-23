@@ -2,13 +2,18 @@ var $$ = Dom7;
 
 
 class Tree {
-    constructor(img, lat, lng, blooming, rating, user) {
+    constructor(img, lat, lng, address, blooming, rating, user) {
         this.img_url = img;
         this.lat = lat;
         this.lng = lng;
+
+        this.address = address;
+
         this.blooming = blooming;
         this.rating = rating;
         this.user = user
+
+
     }
 }
 
@@ -25,8 +30,10 @@ var appNavigator = {
 
     openPageAddTree: function(src, lat, lng) {
 
+
+
         var options = {
-            context: {
+            context: {            
                 tree: new Tree(src, lat, lng),
             }
         };

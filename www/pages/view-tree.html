@@ -45,10 +45,12 @@
                         <!-- LOCATION -->
                         <div class="field">
                             <h2>Location info</h2>
-                            <div class="flex-box">
+                            <div id="location-container" class="flex-box">
                                 <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
                                 <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
                             </div>
+
+                            <span id="tree-address">{{tree.address}}</span>
                         </div>
                     </div>
                 </div>
@@ -134,7 +136,8 @@
                     app.range.get('.range-slider').setValue(self.tree.blooming);
 
                     app.range.get('.range-slider').params.draggableBar = false;
-                })
+
+                });
 
             },
             pageAfterOut: function () {

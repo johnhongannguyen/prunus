@@ -1,8 +1,9 @@
 
 var treeCRUD = {
 
+    //img, [latlng], address, blooming, rating, user
     //latLng -> [-123,321])
-    write: function(user, file, rating, blooming, latLng, callback) {
+    write: function(file, latLng, address, blooming, rating, user, callback) {
 
         //Firebase location for storing coodinates of trees:
         var firebaseRef = firebase.database().ref().child("geo");
@@ -31,6 +32,7 @@ var treeCRUD = {
                     img_url: downloadURL,
                     rating: rating,
                     blooming: blooming,
+                    address: address,
                     user: user
                 }, callback);
             });
@@ -47,6 +49,7 @@ var treeCRUD = {
             var resultTree = new Tree(  result.tree.img_url,
                                         result.l[0],
                                         result.l[1],
+                                        result.tree.address,
                                         result.tree.blooming,
                                         result.tree.rating);
 
