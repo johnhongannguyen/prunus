@@ -99,6 +99,10 @@ html, body {
     padding: 23.5px;
 }
 
+.icons img {
+    height: 25px;
+}
+
 .camera-button, #btn-register-tree {
     position: absolute;
     margin: 5px auto;
