@@ -147,8 +147,11 @@
 
                 $(".rating").load("custom/rating/custom-rating.html", function() {
                     $('custom-rating').on('rate', () => {
+
+                        console.log("new value..");
                         //new value assigned:
                         self.tree.rating = $('custom-rating').val();
+                        console.log("...done!");
                     });
                 });
 
@@ -249,7 +252,7 @@
                         app.preloader.show();
 
                         //img, [latlng], address, blooming, rating, user
-                        treeCRUD.write(self.tree.img_url, [self.tree.lat, self.tree.lng], self.tree.address, blooming, rating, auth.getCurrentUser(), function(){
+                        treeCRUD.write(self.tree.img_url, [self.tree.lat, self.tree.lng], self.tree.address, blooming, self.tree.rating, auth.getCurrentUser(), function(){
 
                             app.preloader.hide();
                             appNavigator.onBackPressed();
