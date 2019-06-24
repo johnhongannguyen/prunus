@@ -17,11 +17,9 @@
                     <div class="foreground user-reaction">
                         <img src="img/pin-flower-shadow.png" alt="Pin Flower" class="pin-flower">
                         <!-- RATING -->
-                        <div class="field">
-                            <div class="flex-box">
-                                <label class="radio"><input type="radio" name="emotion" value="1"><i class="icon-radio"></i>Happy</label>
-                                <label class="radio"><input type="radio" name="emotion" value="2"><i class="icon-radio"></i>Amazed</label>
-                                <label class="radio"><input type="radio" name="emotion" value="3"><i class="icon-radio"></i>Stunned</label>
+                        <div class="field input-section">
+                            <div class="rating">
+                                <!-- custom-rating element will go here -->
                             </div>
                         </div>
 
@@ -39,11 +37,6 @@
                                 <div data-bloom="3" class="elevation-4">Blooming</div>
                             </div>
 
-                            <!-- <div class="item-input-wrap">
-                                <div class="range-slider range-slider-init" data-label="true">
-                                    <input type="range" value="0" min="0" max="2" step="1">
-                                </div>
-                            </div> -->
                         </div>
 
                         <div class="hr-wrapper">
@@ -61,6 +54,7 @@
 
                             <div id="tree-address-load" class="preloader color-red"></div>
                             <span id="tree-address"></span>
+
                         </div>
 
                         <!-- <div class="action-bar">
@@ -151,6 +145,12 @@
                 self.tree = mainView.router.currentRoute.context.tree;
                 self.$setState();    //Forcing the view to reset
 
+                $(".rating").load("custom/rating/custom-rating.html", function() {
+                    $('custom-rating').on('rate', () => {
+                        //new value assigned:
+                        self.tree.rating = $('custom-rating').val();
+                    });
+                });
 
                 treeLocationService.getAddress(self.tree.lat, self.tree.lng, function(address){
                     self.tree.address = address;
@@ -168,17 +168,6 @@
 
                 //SUBMIT CLICK:
                 $("#btn-register-tree").click(function(){
-
-
-
-                    //rating
-                    var rating = 0;
-                    $.each($("input[name='emotion']:checked"), function(){
-                        rating = $(this).val();
-                    });
-                    rating = parseInt(rating);
-
-
 
                     //blooming status
                     // var blooming = $("input[type='range']").val();

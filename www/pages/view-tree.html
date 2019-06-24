@@ -17,11 +17,9 @@
                     <div class="foreground user-reaction">
                         <img src="img/pin-flower-shadow.png" alt="Pin Flower" class="pin-flower">
                         <!-- RATING -->
-                        <div class="field">
-                            <div class="flex-box">
-                                <label class="radio"><input disabled type="radio" name="emotion" value="1" {{checkRating(1)}}><i class="icon-radio"></i>Happy</label>
-                                <label class="radio"><input disabled type="radio" name="emotion" value="2" {{checkRating(2)}}><i class="icon-radio"></i>Amazed</label>
-                                <label class="radio"><input disabled type="radio" name="emotion" value="3" {{checkRating(3)}}><i class="icon-radio"></i>Stunned</label>
+                        <div class="field input-section">
+                            <div class="rating">
+                                <!-- custom-rating element will go here -->
                             </div>
                         </div>
 
@@ -31,36 +29,30 @@
 
                         <!-- STATUS -->
                         <div class="field input-section">
-                                <div class="section-title">STATUS</div>
-                                <div class="status-flex-box">
-                                    <div data-bloom="1" class="elevation-4">Blossoming</div>
-                                    <div data-bloom="2" class="elevation-4">Growing</div>
-                                    <div data-bloom="3" class="elevation-4">Blooming</div>
-                                </div>
-    
-                                <!-- <div class="item-input-wrap">
-                                    <div class="range-slider range-slider-init" data-label="true">
-                                        <input type="range" value="0" min="0" max="2" step="1">
-                                    </div>
-                                </div> -->
+                            <div class="section-title">STATUS</div>
+                            <div class="status-flex-box">
+                                <div data-bloom="1" class="elevation-4">Blossoming</div>
+                                <div data-bloom="2" class="elevation-4">Growing</div>
+                                <div data-bloom="3" class="elevation-4">Blooming</div>
                             </div>
+                        </div>
 
                         <div class="hr-wrapper">
                             <img class="hr" src="img/hr.png" alt="hr">
                         </div>
-    
-    
-                            <!-- LOCATION -->
-                            <div class="field input-section">
-                                <div class="section-title">LOCATION</div>
-                                <div class="flex-box hidden">
-                                    <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
-                                    <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
-                                </div>
-    
-                                <!-- <div id="tree-address-load" class="preloader color-red"></div> -->
-                                <span id="tree-address">{{tree.address}}</span>
+
+
+                        <!-- LOCATION -->
+                        <div class="field input-section">
+                            <div class="section-title">LOCATION</div>
+                            <div class="flex-box hidden">
+                                <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
+                                <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
                             </div>
+
+                            <!-- <div id="tree-address-load" class="preloader color-red"></div> -->
+                            <span id="tree-address">{{tree.address}}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -84,7 +76,7 @@
 
     /* Spacing between each row: */
     .field {
-        margin-bottom: 3rem;
+        /* margin-bottom: 3rem; */
     }
 
     /* centering radio buttons: */
@@ -133,6 +125,8 @@
                 console.log('view-tree initialized');
 
 
+
+
                 //Getting the ID for the tree from the router.
                 var id = mainView.router.currentRoute.context.key;
 
@@ -140,12 +134,20 @@
                 treeCRUD.read(id, function(result) {
                     self.tree = result;    //Updating tree object
                     self.$setState();      //Forcing the view to reset
-                    
+
                     //Setting the value to the slider:
                     // app.range.get('.range-slider').setValue(self.tree.blooming);
 
                     // app.range.get('.range-slider').params.draggableBar = false;
                     $(".status-flex-box div[data-bloom=" + self.tree.blooming + "]").addClass("status-selected")
+
+
+                    $(".rating").load("custom/rating/custom-rating.html", function() {
+                        $('custom-rating').val(self.tree.rating);
+
+                        $('custom-rating').prop('enabled', false);
+                    });
+
 
                 });
 
