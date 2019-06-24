@@ -202,5 +202,14 @@ html, body {
     margin-bottom: 1rem;
 }
 
+.top-border {
+border-top-left-radius: 45px;
+border-top-right-radius: 45px;
+}
+
+.bottom-border {
+    border-bottom-right-radius: 45px;
+    border-bottom-left-radius: 45px;
+}
 
 /*  */

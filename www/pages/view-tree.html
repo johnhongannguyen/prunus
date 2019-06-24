@@ -14,46 +14,48 @@
                         <img id="img-tree" src="{{tree.img_url}}" alt="Tree picture">
                     </div>
 
-                    <div class="foreground user-reaction">
+                    <div class="elevation-4 bottom-border">
+                        <div class="foreground user-reaction bottom-border top-border">
 
-                        <img src="img/pin-flower-shadow.png" alt="Pin Flower" class="pin-flower">
-                        <!-- RATING -->
-                        <div class="field input-section">
-                            <div class="rating">
-                                <!-- custom-rating element will go here -->
-                            </div>
-                        </div>
-
-                        <div class="hr-wrapper">
-                            <img class="hr" src="img/hr.png" alt="hr">
-                        </div>
-
-                        <!-- STATUS -->
-                        <div class="field input-section">
-                            <div class="section-title">STATUS</div>
-                            <div class="status-flex-box">
-                                <div data-bloom="1" class="elevation-4">Blossoming</div>
-                                <div data-bloom="2" class="elevation-4">Growing</div>
-                                <div data-bloom="3" class="elevation-4">Blooming</div>
-                            </div>
-                        </div>
-
-                        <div class="hr-wrapper">
-                            <img class="hr" src="img/hr.png" alt="hr">
-                        </div>
-
-
-                        <!-- LOCATION -->
-                        <div class="field input-section">
-                            <!-- <div class="section-title">LOCATION</div> -->
-                            <div class="flex-box hidden">
-                                <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
-                                <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
+                            <img src="img/pin-flower-shadow.png" alt="Pin Flower" class="pin-flower">
+                            <!-- RATING -->
+                            <div class="field input-section">
+                                <div class="rating">
+                                    <!-- custom-rating element will go here -->
+                                </div>
                             </div>
 
-                            <div class="tree-address-container">
-                                <img id="ic_tree_address" src="img/ic_tree_address.png" alt="">
-                                <span id="tree-address">{{tree.address}}</span>
+                            <div class="hr-wrapper">
+                                <img class="hr" src="img/hr.png" alt="hr">
+                            </div>
+
+                            <!-- STATUS -->
+                            <div class="field input-section">
+                                <div class="section-title">STATUS</div>
+                                <div class="status-flex-box">
+                                    <div data-bloom="1" class="elevation-4">Blossoming</div>
+                                    <div data-bloom="2" class="elevation-4">Growing</div>
+                                    <div data-bloom="3" class="elevation-4">Blooming</div>
+                                </div>
+                            </div>
+
+                            <div class="hr-wrapper">
+                                <img class="hr" src="img/hr.png" alt="hr">
+                            </div>
+
+
+                            <!-- LOCATION -->
+                            <div class="field input-section">
+                                <!-- <div class="section-title">LOCATION</div> -->
+                                <div class="flex-box hidden">
+                                    <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
+                                    <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
+                                </div>
+
+                                <div class="tree-address-container">
+                                    <img id="ic_tree_address" src="img/ic_tree_address.png" alt="">
+                                    <span id="tree-address">{{tree.address}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>

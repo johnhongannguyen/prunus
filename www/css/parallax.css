@@ -27,7 +27,7 @@ div {
 
     /* CHANGE THIS TO MOVE THE IMG */
     /* top: calc(-22vh); */
-    margin-top: -50%;
+    margin-top: -70%;
 
     /* left: calc(-50vw); */
     background: #FFF;
@@ -35,8 +35,6 @@ div {
 
 .foreground {
     /* position: absolute; */
-    border-top-left-radius: 45px;
-    border-top-right-radius: 45px;
     top: 60vh;
     margin-top: 35%;
     width: 100%;
