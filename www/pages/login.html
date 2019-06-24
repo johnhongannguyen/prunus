@@ -19,6 +19,10 @@
 
             <button type="button" class="button" id="btnLogout">Logout</button>
 
+            <div class="rating">
+                <!-- custom-rating element will go here -->
+            </div>
+
         </div>
 
     </div>
@@ -65,6 +69,22 @@
             pageInit: function () {
                 // do something on page init
                 var self = this;
+
+
+                $(".rating").load("../custom/rating/custom-rating.html", function() {
+
+                    $('custom-rating').on('rate', () => {
+
+                        //new value assigned:
+                        let newVal = $('custom-rating').val();
+                        console.log(newVal);
+
+                    });
+
+                });
+
+
+
 
                 $("#btnGoogle").click(function () {
                     auth.loginWithGoogle(function(error){
