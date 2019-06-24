@@ -15,33 +15,38 @@ div {
 }
 
 #group1 {
-    position: relative;
+    /* position: relative; */
     transform-style: preserve-3d;
 }
 
 .background {
 
     /* CHANGE THE SCALE TO FIT... */
-    transform: translateZ(-1px) scale(3);
-    width: 100%;
-    position: absolute;
+    transform: translateZ(-2px) scale(3);
+    /* position: absolute; */
 
     /* CHANGE THIS TO MOVE THE IMG */
-    top: calc(-22vh);
+    /* top: calc(-22vh); */
+    margin-top: -50%;
 
     /* left: calc(-50vw); */
     background: #FFF;
 }
 
 .foreground {
-    position: absolute;
+    /* position: absolute; */
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
     top: 60vh;
+    margin-top: 35%;
     width: 100%;
+    box-shadow: 0px -10px rgba(255,255,255,0.5),
+                0px -20px rgba(255,255,255,0.25) !important;
 }
 
 .background img {
     max-height:60vh;
     width: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 /* PARALLAX END ////////////////////////////////////////// */

@@ -14,7 +14,8 @@
                         <img id="img-tree" src="{{tree.img_url}}" alt="Tree picture">
                     </div>
 
-                    <div class="foreground user-reaction elevation-12">
+                    <div class="foreground user-reaction">
+                        <img src="img/pin-flower-shadow.png" alt="Pin Flower" class="pin-flower">
                         <!-- RATING -->
                         <div class="field">
                             <div class="flex-box">
@@ -25,26 +26,35 @@
                         </div>
 
 
+                        <div class="hr-wrapper">
+                            <img class="hr" src="img/hr.png" alt="hr">
+                        </div>
+
                         <!-- STATUS -->
-                        <div class="field">
-                            <div class="flex-box">
-                                <span>Growing</span>
-                                <span>Blossoming</span>
-                                <span>Fully Bloomed</span>
+                        <div class="field input-section">
+                            <div class="section-title">STATUS</div>
+                            <div class="status-flex-box">
+                                <div data-bloom="1" class="elevation-4">Blossoming</div>
+                                <div data-bloom="2" class="elevation-4">Growing</div>
+                                <div data-bloom="3" class="elevation-4">Blooming</div>
                             </div>
 
-                            <div class="item-input-wrap">
+                            <!-- <div class="item-input-wrap">
                                 <div class="range-slider range-slider-init" data-label="true">
                                     <input type="range" value="0" min="0" max="2" step="1">
                                 </div>
-                            </div>
+                            </div> -->
+                        </div>
+
+                        <div class="hr-wrapper">
+                            <img class="hr" src="img/hr.png" alt="hr">
                         </div>
 
 
                         <!-- LOCATION -->
-                        <div class="field">
-                            <h2>Location info</h2>
-                            <div class="flex-box">
+                        <div class="field input-section">
+                            <div class="section-title">LOCATION</div>
+                            <div class="flex-box hidden">
                                 <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
                                 <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
                             </div>
@@ -53,10 +63,16 @@
                             <span id="tree-address"></span>
                         </div>
 
-                        <div class="action-bar">
+                        <!-- <div class="action-bar">
                             <button id="btn-register-tree">Submit</button>
-                        </div>
+                        </div> -->
                     </div>
+                    <div id="btn-register-tree" class="fab color-black">
+                            <a href="#">
+                                <img src="img/ic-plant-seed.png" alt="Plant tree icon">
+                            </a>
+                            <!-- <img src="https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fadd_tree_icon_35px.png?alt=media&token=39dac19c-9345-4c6c-b76d-e27405e4f43f" alt="Add tree icon"> -->
+                        </div>
                 </div>
             </div>
 
@@ -72,14 +88,14 @@
         background: #eee;
 
         /* TODO - remove this */
-        padding-bottom: 200px;
+        padding-bottom: 2rem;
     }
 
 
     /* Spacing between each row: */
-    .field {
+    /* .field {
         margin-bottom: 3rem;
-    }
+    } */
 
     /* centering radio buttons: */
     .field .radio i {
@@ -143,6 +159,11 @@
                 });
 
 
+                $(".status-flex-box div").click(function() {
+                    $(".status-flex-box div").removeClass("status-selected")
+                    $(this).addClass("status-selected")
+                    // alert($(".status-selected").attr("data-bloom"))
+                })
 
 
                 //SUBMIT CLICK:
@@ -160,7 +181,8 @@
 
 
                     //blooming status
-                    var blooming = $("input[type='range']").val();
+                    // var blooming = $("input[type='range']").val();
+                    var blooming = $(".status-selected").attr("data-bloom")
                     blooming = parseInt(blooming);
 
 

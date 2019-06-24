@@ -167,7 +167,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 scaledSize: new google.maps.Size(25,25),
                 url: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic_tree_pin.png?alt=media&token=86ede326-7f78-4196-a6a2-9d34a484b9c4"
             },
-            zIndex: 0,
+            zIndex: 2,
             map: map,
 
             key_id: key //Extra property added to the icon object.
