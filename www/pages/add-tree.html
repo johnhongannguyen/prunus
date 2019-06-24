@@ -46,14 +46,19 @@
 
                         <!-- LOCATION -->
                         <div class="field input-section">
-                            <div class="section-title">LOCATION</div>
+                            <!-- <div class="section-title">LOCATION</div> -->
                             <div class="flex-box hidden">
                                 <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
                                 <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
                             </div>
 
-                            <div id="tree-address-load" class="preloader color-red"></div>
-                            <span id="tree-address"></span>
+
+                            <div class="tree-address-container">
+                                <img id="ic_tree_address" src="img/ic_tree_address.png" alt="">
+                                <div id="tree-address-load" class="preloader color-red"></div>
+                                <span id="tree-address"></span>
+                            </div>
+                            <!-- <span id="tree-address"></span> -->
 
                         </div>
 
