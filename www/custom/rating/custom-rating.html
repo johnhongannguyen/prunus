@@ -101,6 +101,9 @@
     }
 
     //This makes the DOM recognize the custom HTML element:
-    window.customElements.define('custom-rating', CustomRating);
+    if(!window.customElements.get('custom-rating')){
+        window.customElements.define('custom-rating', CustomRating);
+    }
+
 
 </script>
