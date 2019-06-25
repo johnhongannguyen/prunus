@@ -30,7 +30,7 @@ div {
     margin-top: -70%;
 
     /* left: calc(-50vw); */
-    background: #FFF;
+    background: #ddd;
 }
 
 .foreground {
@@ -43,7 +43,9 @@ div {
 }
 
 .background img {
+    background-color: rgba(0, 0, 0, 0);
     max-height:60vh;
+    min-height: 60vh;
     width: 100%;
     /* object-fit: cover; */
 }
