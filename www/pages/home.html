@@ -25,66 +25,37 @@
 
     <div class="app">
 
-        <div class="panel panel-left panel-cover theme-dark">
-          <div class="view">
-            <div class="page">
-              <div class="navbar">
-                <div class="navbar-inner">
-                  <div class="title-panel">Left Panel</div>
-                </div>
-              </div>
-              <div class="page-content">
-                <div class="block">Left panel content goes here</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="nav-bar">
-            <div class="icons hamburger-menu">
-
-                <!-- This opens the left panel: -->
-                <a href="#" class="link icon-only panel-open" data-panel="left">
-                  <img src="img/ic_hamburguer.png" alt="Hamburger menu">
-                </a>
-
-            </div>
-            <div class="title">Prunus</div>
             <div class="icons profile"><img src="img/ic_profile.png" alt="Profile"></div>
+
+            <div class="title">Prunus</div>
+
+            <div>
+                <!-- This div is just a placeholder now -->
+                <!-- <img src="img/ic_profile.png" alt="Profile"> -->
+            </div>
         </div>
 
         <div id="map" class="elevation-4">
             <!-- Google map will be added here programmatically. -->
         </div>
 
-        <!-- <div class="content">
-        <button onclick="myLocation()">My location</button>
-        <button onclick="getTreesAround()">Get trees around</button>
-    </div> -->
 
-    <!-- <div class="bottom-bar"> -->
-    <!-- <div class="camera-button elevation-4">
-    <img src="https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fadd_tree_icon_35px.png?alt=media&token=39dac19c-9345-4c6c-b76d-e27405e4f43f" alt="Add tree icon">
-</div> -->
+        <!-- <button onclick="myLocation()">My location</button>
+        <button onclick="getTreesAround()">Get trees around</button> -->
+
 <div class="fab camera-button color-black">
     <a href="#">
         <img src="img/ic_add_btn.png" alt="Add tree icon">
     </a>
-    <!-- <img src="https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fadd_tree_icon_35px.png?alt=media&token=39dac19c-9345-4c6c-b76d-e27405e4f43f" alt="Add tree icon"> -->
+
 </div>
 <!-- </div> -->
 </div>
 </div>
 <!-- END OF PAGE CONTENT -->
 
-
 <script>
-
-    //todo - remove this
-    $('.hamburger-menu').click(function(){
-        // appNavigator.openPageAddTree('img/test.png', pos.lat, pos.lng);
-        // appNavigator.openPageViewTree('-Li6BHFDHCs5BKtDIeX9');
-    });
 
     $('.nav-bar .profile').click(function(){
         appNavigator.openPageLogin();
@@ -121,7 +92,7 @@
         navigator.camera.getPicture(function(imageURI) {
 
             //Success:
-            appNavigator.openPageAddTree("data:image/jpeg;base64," + imageURI, pos.lat, pos.lng);            
+            appNavigator.openPageAddTree("data:image/jpeg;base64," + imageURI, pos.lat, pos.lng);
 
 
         }, function(msg) {
