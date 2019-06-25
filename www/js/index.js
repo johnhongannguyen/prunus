@@ -30,10 +30,8 @@ var appNavigator = {
 
     openPageAddTree: function(src, lat, lng) {
 
-
-
         var options = {
-            context: {            
+            context: {
                 tree: new Tree(src, lat, lng),
             }
         };
@@ -58,8 +56,26 @@ var appNavigator = {
         mainView.router.navigate('/login/');
     },
 
+    openPageProfile: function() {
+
+        mainView.router.navigate('/profile/');
+    },
+
     //Call this to close a page.
     onBackPressed:function(){
+
+        if(mainView.history.length == 2){
+
+            // When coming back from third page navigation... Index content becomes blank.
+            // So in that case we are force-reloading the index.
+            if($("#app .page").html().trim() == ''){
+                mainView.router.back();
+
+                location.reload(true);
+                return;
+            }
+        }
+
 
         if(mainView.history.length > 1){
             mainView.router.back();

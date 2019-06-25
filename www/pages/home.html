@@ -58,7 +58,13 @@
 <script>
 
     $('.nav-bar .profile').click(function(){
-        appNavigator.openPageLogin();
+
+        if(auth.getCurrentUser()){
+            appNavigator.openPageProfile();
+        } else {
+            appNavigator.openPageLogin();
+        }
+
     });
 
 

@@ -27,6 +27,23 @@ var auth = {
 
     },
 
+    getCurrentUser: function(){
+
+        var userF = firebase.auth().currentUser
+
+        if(userF){
+            return new User(userF.uid, userF.photoURL, userF.displayName);
+        }
+
+        return null;
+    },
+
+    logout: function(){
+
+        firebase.auth().signOut().then(function(){
+        });
+    },
+
     //Use this to listen to login changes on pages: (Example is below the function)
     //listener(user) -> if user exists, then its signed in.
     setLoginListener: function (listener) {
@@ -91,25 +108,6 @@ var auth = {
         });
 
     },
-
-    getCurrentUser: function(){
-
-        var userF = firebase.auth().currentUser
-
-        if(userF){
-            return new User(userF.uid, userF.photoURL, userF.displayName);
-        }
-
-        return null;
-    },
-
-    logout: function(){
-
-        firebase.auth().signOut().then(function(){
-        });
-    },
-
-
 
 
     //--------------------------------------------------------------------------

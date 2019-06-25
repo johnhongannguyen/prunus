@@ -38,18 +38,18 @@
         <div class="view view-main safe-areas">
 
             <!-- HOME (MAP) -->
-            <div class="page" data-name="home">
 
-                <!-- HOME PAGE IS LOADED HERE (pages/home.html) -->
-                <!-- All other pages uses routing navigation -->
+            <!-- HOME PAGE IS LOADED HERE (pages/home.html) -->
+            <div class="page" data-name="home"></div>
+            <!-- Dont place anything inside this div! not even comments! -->
+            <!-- All other pages uses routing navigation -->
 
-            </div>
             <!-- END OF HOME (MAP) -->
 
         </div>
 
 
-        <div id="init-preferences">
+        <div id="init-preferences" onload="initIndex()">
             <!-- html & JS initialization code will be added here programmatically. -->
         </div>
 
@@ -98,6 +98,16 @@
         }
 
     });
+
+
+
+    function initIndex(){
+
+        console.log("adfdfsdf------adfdfsdf------adfdfsdf------adfdfsdf------adfdfsdf------adfdfsdf------adfdfsdf------");
+
+    }
+
+
 
     </script>
 

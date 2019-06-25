@@ -83,6 +83,13 @@ html, body {
 }
 
 .nav-bar {
+    padding-top: 10px !important;
+
+    display: grid !important;
+
+    grid-template-rows: 1fr !important;
+    grid-template-columns: 75px 1fr 75px !important;
+
     background-color: transparent !important;
     border-bottom: 0px !important;
     display: flex;
