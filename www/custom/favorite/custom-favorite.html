@@ -1,0 +1,118 @@
+<!-- USAGE: Add a div to contain the favorite bar: -->
+<!-- <div class="favorite"> -->
+<!-- </div> -->
+
+<!-- THEN ON JS: Load the component and listen to value changes -->
+
+<!-- $(".favorite").load("custom/favorite/custom-favorite.html", function() {
+
+$('custom-favorite').on('heart', () => {
+
+//new value assigned:
+let newVal = $('custom-favorite').val();
+console.log(newVal);`
+
+});
+
+}); -->
+
+<!-- To disable: -->
+<!-- $('custom-favorite').prop('enabled', false); -->
+
+<custom-favorite>
+</custom-favorite>
+
+<style>
+    custom-favorite {
+        display:flex;
+    }
+
+    custom-favorite > .star {
+        margin-left: 3px;
+        margin-right: 3px;
+        width:45px;
+        height:45px;
+
+        /* Path is actually from the page that is calling... */
+        background-image: url('custom/favorite/ic_no_love.png');
+        background-size: cover;
+    }
+
+    custom-favorite > .star.full {
+        margin-left: 3px;
+        margin-right: 3px;
+        width:45px;
+        height:45px;
+
+        /* Path is actually from the page that is calling... */
+        background-image: url('custom/favorite/ic_love.png');
+        background-size: cover;
+    }
+</style>
+
+<script>
+    class CustomFavorite extends HTMLElement{
+
+        get value () {
+            return this.getAttribute('value') || 0;
+        }
+
+        set value (val) {
+            this.setAttribute('value', val);
+            this.select(this.value - 1);
+        }
+
+        get enabled () {
+            return this.getAttribute('enabled') || true;
+        }
+
+        set enabled (val) {
+            this.setAttribute('enabled', val);
+        }
+
+        constructor(){
+            super();
+
+            this.hearts = [];
+
+            for (var i = 0; i < 1; i++) {
+                let s = document.createElement('div');
+                s.className = 'star';
+                this.appendChild(s);
+                this.hearts.push(s);
+            }
+
+            //This has to be after the loop...
+            this.value = this.value;
+            this.enabled = this.enabled;
+
+            this.addEventListener('click', this.getClickFunction, false);
+        }
+
+        select(index){
+            this.hearts.forEach((heart,i) => {
+                heart.classList.toggle('full', i <= index );
+            });
+        }
+
+        getClickFunction(e) {
+
+                if(this.enabled + '' === 'true'){
+
+                    this.value = this.value == "0" ? "1" : "0";
+
+                    //Every time the user clicks in a star, dispatch this event.
+                    let heartEvent = new Event('heart');
+                    this.dispatchEvent(heartEvent);
+                }
+        }
+
+    }
+
+    //This makes the DOM recognize the custom HTML element:
+    if(!window.customElements.get('custom-favorite')){
+        window.customElements.define('custom-favorite', CustomFavorite);
+    }
+
+
+</script>

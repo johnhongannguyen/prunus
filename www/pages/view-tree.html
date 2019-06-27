@@ -11,6 +11,9 @@
                 <div id="group1">
 
                     <div class="background">
+                        <div class="favorite">
+                            <!-- custom-favorite element will go here -->
+                        </div>
                         <img id="img-tree" src="{{tree.img_url}}">
                     </div>
 
@@ -129,6 +132,7 @@
 
                 //This tree object will be filled after the firebase request:
                 tree: new Tree(),
+                favorite: false,
 
                 checkRating: function(v){
 
@@ -171,6 +175,17 @@
                         $('custom-bloom').val(self.tree.blooming);
 
                         $('custom-bloom').prop('enabled', false);
+                    });
+
+                    $(".favorite").load("custom/favorite/custom-favorite.html", function() {
+                        $('custom-favorite').val(0);
+
+                        $('custom-favorite').on('heart', () => {
+                            console.log("new value..");
+                            //new value assigned:
+                            self.favorite = parseInt($('custom-favorite').val());
+                            console.log("...done!");
+                        });
                     });
 
 
