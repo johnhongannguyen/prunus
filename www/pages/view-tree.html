@@ -18,8 +18,22 @@
                         <div class="foreground user-reaction bottom-border top-border">
 
                             <img src="img/pin-flower-shadow.png" alt="Pin Flower" class="pin-flower">
+                            
+                            <!-- BLOOM -->
+                            <div class="field input-section">
+                                <div id="title-bloom" class="section-title">BLOOM</div>
+                                <div class="bloom">
+                                    <!-- custom-bloom element will go here -->
+                                </div>
+                            </div>
+
+                            <div class="hr-wrapper">
+                                <img class="hr" src="img/hr.png" alt="hr">
+                            </div>
+                            
                             <!-- RATING -->
                             <div class="field input-section">
+                                <div class="section-title">RATING</div>
                                 <div class="rating">
                                     <!-- custom-rating element will go here -->
                                 </div>
@@ -30,7 +44,7 @@
                             </div>
 
                             <!-- STATUS -->
-                            <div class="field input-section">
+                            <!-- <div class="field input-section">
                                 <div class="section-title">STATUS</div>
                                 <div class="status-flex-box">
                                     <div data-bloom="1" class="elevation-4">Blossoming</div>
@@ -41,7 +55,7 @@
 
                             <div class="hr-wrapper">
                                 <img class="hr" src="img/hr.png" alt="hr">
-                            </div>
+                            </div> -->
 
 
                             <!-- LOCATION -->
@@ -144,13 +158,19 @@
                     // app.range.get('.range-slider').setValue(self.tree.blooming);
 
                     // app.range.get('.range-slider').params.draggableBar = false;
-                    $(".status-flex-box div[data-bloom=" + self.tree.blooming + "]").addClass("status-selected")
+                    // $(".status-flex-box div[data-bloom=" + self.tree.blooming + "]").addClass("status-selected")
 
 
                     $(".rating").load("custom/rating/custom-rating.html", function() {
                         $('custom-rating').val(self.tree.rating);
 
                         $('custom-rating').prop('enabled', false);
+                    });
+
+                    $(".bloom").load("custom/bloom/custom-bloom.html", function() {
+                        $('custom-bloom').val(self.tree.blooming);
+
+                        $('custom-bloom').prop('enabled', false);
                     });
 
 

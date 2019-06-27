@@ -1,0 +1,128 @@
+<!-- USAGE: Add a div to contain the bloom bar: -->
+<!-- <div class="bloom"> -->
+<!-- </div> -->
+
+<!-- THEN ON JS: Load the component and listen to value changes -->
+
+<!-- $(".bloom").load("custom/bloom/custom-bloom.html", function() {
+
+$('custom-bloom').on('rate', () => {
+
+//new value assigned:
+let newVal = $('custom-bloom').val();
+console.log(newVal);
+
+});
+
+}); -->
+
+<!-- To disable: -->
+<!-- $('custom-bloom').prop('enabled', false); -->
+
+<custom-bloom>
+</custom-bloom>
+
+<style>
+    custom-bloom {
+        display:flex;
+    }
+
+    custom-bloom > .star {
+        margin-left: 3px;
+        margin-right: 3px;
+        width:45px;
+        height:45px;
+
+        /* Path is actually from the page that is calling... */
+        background-image: url('custom/bloom/ic_bloom_empty.png');
+        background-size: cover;
+    }
+
+    custom-bloom > .star.full {
+        margin-left: 3px;
+        margin-right: 3px;
+        width:45px;
+        height:45px;
+
+        /* Path is actually from the page that is calling... */
+        background-image: url('custom/bloom/ic_bloom_full.png');
+        background-size: cover;
+    }
+</style>
+
+<script>
+    class CustomBloom extends HTMLElement{
+
+        get value () {
+            return this.getAttribute('value') || 0;
+        }
+
+        set value (val) {
+            this.setAttribute('value', val);
+            this.select(this.value - 1);
+        }
+
+        get enabled () {
+            return this.getAttribute('enabled') || true;
+        }
+
+        set enabled (val) {
+            this.setAttribute('enabled', val);
+        }
+
+        constructor(){
+            super();
+
+            this.stars = [];
+
+            for (var i = 0; i < 5; i++) {
+                let s = document.createElement('div');
+                s.className = 'star';
+                this.appendChild(s);
+                this.stars.push(s);
+            }
+
+            //This has to be after the loop...
+            this.value = this.value;
+            this.enabled = this.enabled;
+
+            this.addEventListener('click', this.getClickFunction, false);
+        }
+
+        select(index){
+            this.stars.forEach((star,i) => {
+                star.classList.toggle('full', i <= index );
+            });
+        }
+
+        getClickFunction(e) {
+
+                if(this.enabled + '' === 'true'){
+
+                    //Get current child:
+                    e = e || window.event;
+                    var currentChild = e.target || e.srcElement, text = currentChild.textContent || currentChild.innerText;
+
+                    //get current position:
+                    var pos = 0;
+                    while( (currentChild = currentChild.previousSibling) != null ){
+                        pos++;
+                    }
+
+                    this.value = pos;
+
+                    //Every time the user clicks in a star, dispatch this event.
+                    let rateEvent = new Event('rate');
+                    this.dispatchEvent(rateEvent);
+                }
+        }
+
+    }
+
+    //This makes the DOM recognize the custom HTML element:
+    if(!window.customElements.get('custom-bloom')){
+        window.customElements.define('custom-bloom', CustomBloom);
+    }
+
+
+</script>
