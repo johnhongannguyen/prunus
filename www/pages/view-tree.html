@@ -154,7 +154,7 @@
                 var id = mainView.router.currentRoute.context.key;
 
 
-                treeCRUD.read(id, function(result) {
+                treeCRUD.read(id, auth.getCurrentUser(), function(result, isFavorite) {
                     self.tree = result;    //Updating tree object
                     self.$setState();      //Forcing the view to reset
 
@@ -178,13 +178,26 @@
                     });
 
                     $(".favorite").load("custom/favorite/custom-favorite.html", function() {
-                        $('custom-favorite').val(0);
+                        $('custom-favorite').val(isFavorite ? 1 : 0);
 
                         $('custom-favorite').on('heart', () => {
                             console.log("new value..");
                             //new value assigned:
-                            self.favorite = parseInt($('custom-favorite').val());
+                            self.favorite = Boolean(parseInt($('custom-favorite').val()));
+                            console.log("Favorite: " + self.favorite)
                             console.log("...done!");
+
+                            if (self.favorite) {
+                                //Add tree to the user's list of favorites
+                                userCRUD.addTreeToFavorites(auth.getCurrentUser(), id, function() {
+
+                                })
+                            } else {
+                                //Remove tree from the user's list of favorites
+                                userCRUD.removeTreeFromFavorites(auth.getCurrentUser(), id, function() {
+
+                                })
+                            }
                         });
                     });
 

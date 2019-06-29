@@ -41,21 +41,24 @@ var treeCRUD = {
 
     },
 
-    read: function(key, callback) {
+    read: function(key, user, callback) {
         //Fetch and return GeoFire object from Firebase
         firebase.database().ref('/geo/' + key).once('value').then(function(snapshot) {
 
-            var result = snapshot.val();
-            var resultTree = new Tree(  result.tree.img_url,
-                                        result.l[0],
-                                        result.l[1],
-                                        result.tree.address,
-                                        result.tree.blooming,
-                                        result.tree.rating);
+            // Check if tree exists in user's favorite trees
+            firebase.database().ref('/users/' + user.uid + '/favorites/' + key).once('value').then(function(isFavorite) {
+                var result = snapshot.val();
+                var resultTree = new Tree(  result.tree.img_url,
+                                            result.l[0],
+                                            result.l[1],
+                                            result.tree.address,
+                                            result.tree.blooming,
+                                            result.tree.rating);
 
 
 
-            callback(resultTree)
+                callback(resultTree, isFavorite.val())
+            });
         });
     }
 

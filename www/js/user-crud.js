@@ -67,4 +67,43 @@ var userCRUD = {
                 callback(result);
             });
         },
+
+        addTreeToFavorites: function(user, treeID, callback) {
+            console.log("In UserCRUD->addTreeToFavorites")
+            // console.log(JSON.stringify(user))
+            // console.log(JSON.stringify(tree))
+
+            // Apparently the only way to name a JSON key from a variable's value
+            // Ref: https://stackoverflow.com/questions/13833204/how-to-set-a-js-object-property-name-from-a-variable
+            var treeKey = {};
+            for(var i=1; i <= 1; i++) {
+                treeKey[treeID] = true;        
+            }
+
+            // Firebase location for storing users:
+            var firebaseRef = firebase.database().ref().child("users");
+
+            // Add a reference to the Tree object inside the User's favorite tree list
+            var treeRef = firebaseRef.child(user.uid + "/favorites")
+                .update(
+                    treeKey
+                    , callback);
+        },
+
+        removeTreeFromFavorites: function(user, treeID, callback) {
+            console.log("In UserCRUD->removeTreeFromFavorites")
+            
+            // Firebase location for storing users:
+            var firebaseRef = firebase.database().ref().child("users");
+
+            // Remove a Tree object reference from the User's favorite tree list
+            var treeRef = firebaseRef.child(user.uid + "/favorites/" + treeID)
+            treeRef.remove()
+                .then(function() {
+                    console.log("Remove succeeded.")
+                })
+                .catch(function(error) {
+                    console.log("Remove failed: " + error.message)
+                });
+        }
     }
