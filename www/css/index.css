@@ -141,6 +141,7 @@ html, body {
 
 .hr-wrapper {
     text-align: center;
+    margin: 1rem 0px;
 }
 
 .hr {
@@ -167,6 +168,15 @@ html, body {
     color: #DB2763;
     font-size: 1.3rem;
     margin: 1rem;
+}
+
+#title-bloom {
+    margin-top: 0px;
+}
+
+.favorite {
+    position: absolute;
+    right: 0
 }
 
 .status-selected {

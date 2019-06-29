@@ -17,8 +17,23 @@
                     <div class="elevation-4 bottom-border">
                         <div class="foreground user-reaction bottom-border top-border">
                             <img src="img/pin-flower-shadow.png" alt="Pin Flower" class="pin-flower">
+                            
+                            <!-- BLOOM -->
+                            <div class="field input-section">
+                                <div id="title-bloom" class="section-title">BLOOM</div>
+                                <div class="bloom">
+                                    <!-- custom-bloom element will go here -->
+                                </div>
+                            </div>
+
+
+                            <div class="hr-wrapper">
+                                <img class="hr" src="img/hr.png" alt="hr">
+                            </div>
+                            
                             <!-- RATING -->
                             <div class="field input-section">
+                                <div class="section-title">RATING</div>
                                 <div class="rating">
                                     <!-- custom-rating element will go here -->
                                 </div>
@@ -30,7 +45,7 @@
                             </div>
 
                             <!-- STATUS -->
-                            <div class="field input-section">
+                            <!-- <div class="field input-section">
                                 <div class="section-title">STATUS</div>
                                 <div class="status-flex-box">
                                     <div data-bloom="1" class="elevation-4">Blossoming</div>
@@ -42,7 +57,7 @@
 
                             <div class="hr-wrapper">
                                 <img class="hr" src="img/hr.png" alt="hr">
-                            </div>
+                            </div> -->
 
 
                             <!-- LOCATION -->
@@ -162,6 +177,16 @@
                     });
                 });
 
+                $(".bloom").load("custom/bloom/custom-bloom.html", function() {
+                    $('custom-bloom').on('rate', () => {
+
+                        console.log("new value..");
+                        //new value assigned:
+                        self.tree.blooming = $('custom-bloom').val();
+                        console.log("...done!");
+                    });
+                });
+
                 treeLocationService.getAddress(self.tree.lat, self.tree.lng, function(address){
                     self.tree.address = address;
                     $("#tree-address-load").hide();
@@ -169,11 +194,11 @@
                 });
 
 
-                $(".status-flex-box div").click(function() {
-                    $(".status-flex-box div").removeClass("status-selected")
-                    $(this).addClass("status-selected")
-                    // alert($(".status-selected").attr("data-bloom"))
-                })
+                // $(".status-flex-box div").click(function() {
+                //     $(".status-flex-box div").removeClass("status-selected")
+                //     $(this).addClass("status-selected")
+                //     // alert($(".status-selected").attr("data-bloom"))
+                // })
 
 
                 //SUBMIT CLICK:
@@ -181,8 +206,9 @@
 
                     //blooming status
                     // var blooming = $("input[type='range']").val();
-                    var blooming = $(".status-selected").attr("data-bloom")
-                    blooming = parseInt(blooming);
+                    // var blooming = $(".status-selected").attr("data-bloom")
+                    // blooming = parseInt(blooming);
+                    // var blooming = 0;
 
 
 
@@ -259,7 +285,7 @@
                         app.preloader.show();
 
                         //img, [latlng], address, blooming, rating, user
-                        treeCRUD.write(self.tree.img_url, [self.tree.lat, self.tree.lng], self.tree.address, blooming, self.tree.rating, auth.getCurrentUser(), function(){
+                        treeCRUD.write(self.tree.img_url, [self.tree.lat, self.tree.lng], self.tree.address, self.tree.blooming, self.tree.rating, auth.getCurrentUser(), function(){
 
                             app.preloader.hide();
                             appNavigator.onBackPressed();

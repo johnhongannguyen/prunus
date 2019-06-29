@@ -11,6 +11,9 @@
                 <div id="group1">
 
                     <div class="background">
+                        <div class="favorite">
+                            <!-- custom-favorite element will go here -->
+                        </div>
                         <img id="img-tree" src="{{tree.img_url}}">
                     </div>
 
@@ -18,8 +21,22 @@
                         <div class="foreground user-reaction bottom-border top-border">
 
                             <img src="img/pin-flower-shadow.png" alt="Pin Flower" class="pin-flower">
+                            
+                            <!-- BLOOM -->
+                            <div class="field input-section">
+                                <div id="title-bloom" class="section-title">BLOOM</div>
+                                <div class="bloom">
+                                    <!-- custom-bloom element will go here -->
+                                </div>
+                            </div>
+
+                            <div class="hr-wrapper">
+                                <img class="hr" src="img/hr.png" alt="hr">
+                            </div>
+                            
                             <!-- RATING -->
                             <div class="field input-section">
+                                <div class="section-title">RATING</div>
                                 <div class="rating">
                                     <!-- custom-rating element will go here -->
                                 </div>
@@ -30,7 +47,7 @@
                             </div>
 
                             <!-- STATUS -->
-                            <div class="field input-section">
+                            <!-- <div class="field input-section">
                                 <div class="section-title">STATUS</div>
                                 <div class="status-flex-box">
                                     <div data-bloom="1" class="elevation-4">Blossoming</div>
@@ -41,7 +58,7 @@
 
                             <div class="hr-wrapper">
                                 <img class="hr" src="img/hr.png" alt="hr">
-                            </div>
+                            </div> -->
 
 
                             <!-- LOCATION -->
@@ -115,6 +132,7 @@
 
                 //This tree object will be filled after the firebase request:
                 tree: new Tree(),
+                favorite: false,
 
                 checkRating: function(v){
 
@@ -136,7 +154,7 @@
                 var id = mainView.router.currentRoute.context.key;
 
 
-                treeCRUD.read(id, function(result) {
+                treeCRUD.read(id, auth.getCurrentUser(), function(result, isFavorite) {
                     self.tree = result;    //Updating tree object
                     self.$setState();      //Forcing the view to reset
 
@@ -144,13 +162,43 @@
                     // app.range.get('.range-slider').setValue(self.tree.blooming);
 
                     // app.range.get('.range-slider').params.draggableBar = false;
-                    $(".status-flex-box div[data-bloom=" + self.tree.blooming + "]").addClass("status-selected")
+                    // $(".status-flex-box div[data-bloom=" + self.tree.blooming + "]").addClass("status-selected")
 
 
                     $(".rating").load("custom/rating/custom-rating.html", function() {
                         $('custom-rating').val(self.tree.rating);
 
                         $('custom-rating').prop('enabled', false);
+                    });
+
+                    $(".bloom").load("custom/bloom/custom-bloom.html", function() {
+                        $('custom-bloom').val(self.tree.blooming);
+
+                        $('custom-bloom').prop('enabled', false);
+                    });
+
+                    $(".favorite").load("custom/favorite/custom-favorite.html", function() {
+                        $('custom-favorite').val(isFavorite ? 1 : 0);
+
+                        $('custom-favorite').on('heart', () => {
+                            console.log("new value..");
+                            //new value assigned:
+                            self.favorite = Boolean(parseInt($('custom-favorite').val()));
+                            console.log("Favorite: " + self.favorite)
+                            console.log("...done!");
+
+                            if (self.favorite) {
+                                //Add tree to the user's list of favorites
+                                userCRUD.addTreeToFavorites(auth.getCurrentUser(), id, function() {
+
+                                })
+                            } else {
+                                //Remove tree from the user's list of favorites
+                                userCRUD.removeTreeFromFavorites(auth.getCurrentUser(), id, function() {
+
+                                })
+                            }
+                        });
                     });
 
 
