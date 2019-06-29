@@ -59,11 +59,11 @@
 
     $('.nav-bar .profile').click(function(){
 
-        // if(auth.getCurrentUser()){
+        if(auth.getCurrentUser()){
             appNavigator.openPageProfile();
-        // } else {
-        //     appNavigator.openPageLogin();
-        // }
+        } else {
+            appNavigator.openPageLogin();
+        }
 
     });
 
