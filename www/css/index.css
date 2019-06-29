@@ -19,6 +19,16 @@
     src: url('../fonts/callie-hand.woff2') format('woff2')
 }
 
+@font-face {
+  font-family: 'Avenir-Roman';
+  src: url('../fonts/Avenir-Roman.ttf') format('truetype')
+
+}
+
+body {
+    font-family: 'Avenir-Roman';
+}
+
 .pin-flower {
     width: 120px;
     margin-top: -94px;
@@ -83,7 +93,7 @@ html, body {
 }
 
 .nav-bar {
-    padding-top: 10px !important;
+    /* padding-top: 10px !important; */
 
     display: grid !important;
 
