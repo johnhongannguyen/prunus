@@ -25,6 +25,12 @@ routes = [
 
     },
 
+    {
+        path: '/settings/',
+        componentUrl: './pages/settings.html',
+
+    },
+
     // Default route (404 page). MUST BE THE LAST
     {
         path: '(.*)',

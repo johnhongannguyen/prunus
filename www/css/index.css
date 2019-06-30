@@ -22,11 +22,19 @@
 @font-face {
   font-family: 'Avenir-Roman';
   src: url('../fonts/Avenir-Roman.ttf') format('truetype')
+}
 
+@font-face {
+  font-family: 'Avenir-Black';
+  src: url('../fonts/Avenir-Black.ttf') format('truetype')
 }
 
 body {
     font-family: 'Avenir-Roman';
+}
+
+img {
+    width: 100%;
 }
 
 .pin-flower {
@@ -230,8 +238,8 @@ html, body {
 }
 
 .top-border {
-border-top-left-radius: 45px;
-border-top-right-radius: 45px;
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
 }
 
 .bottom-border {

@@ -38,10 +38,9 @@ var auth = {
         return null;
     },
 
-    logout: function(){
+    logout: function(callback){
 
-        firebase.auth().signOut().then(function(){
-        });
+        firebase.auth().signOut().then(callback);
     },
 
     //Use this to listen to login changes on pages: (Example is below the function)

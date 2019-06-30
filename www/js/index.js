@@ -61,6 +61,11 @@ var appNavigator = {
         mainView.router.navigate('/profile/');
     },
 
+    openPageSettings: function() {
+
+        mainView.router.navigate('/settings/');
+    },
+
     //Call this to close a page.
     onBackPressed:function(){
 

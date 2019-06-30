@@ -5,25 +5,44 @@
     <div class="page" data-name="login">
 
         <!-- Scrollable PAGE CONTENT-->
-        <div class="page-content">
+        <div class="page-content login-layout">
 
-            LOGIN
+            <div class="frame-layout-login">
+                <div class="back-login">
+                    <img class="img-top" src="img/bg_flower_top.png" alt="">
+                    <img class="img-bottom" src="img/bg_flower_bottom.png" alt="">
+                </div>
 
-            <div id="user-container">
-                <img id="user-img" src="" alt="user-picture">
-                <input type="text" id="user-name" disabled>
-                <input type="text" id="user-email" value="r_none_l@hotmail.com" disabled>
+                <div class="front-login linear-vertical-center-login">
+
+                    <img class="img-login" src="img/img_login.png">
+
+                    <div id="btnGoogle" class="elevation-4">
+                        <img src="img/ic_google.png" alt="">
+                        <span>LOGIN WITH GOOGLE</span>
+                    </div>
+
+                    <div id="btnFacebook" class="elevation-4">
+                        <img src="img/ic_facebook.png" alt="">
+                        <span>LOGIN WITH FACEBOOK</span>
+                    </div>
+
+                    <div class="or-container">
+                        <img src="img/hr.png">
+                        <span class="or-span">OR</span>
+                        <img src="img/hr.png">
+                    </div>
+
+                    <div id="btnSkip" class="elevation-4">
+                        SKIP
+                    </div>
+
+                </div>
+
             </div>
 
-
-            <button type="button" class="button elevation-4" id="btnFacebook">Facebook</button>
-            <button type="button" class="button elevation-4" id="btnGoogle">Google</button>
-
-            <button type="button" class="button elevation-4" id="btnLogout">Logout</button>
-
-            <button type="button" class="button elevation-4" id="btnSkip">Skip</button>
-
         </div>
+
 
     </div>
 
@@ -31,34 +50,141 @@
 <!-- component styles -->
 <style>
 
-
-    #btnFacebook, #btnGoogle, #btnLogout {
-        border-radius: 30px;
-        padding: 5px 0px;
-        margin-bottom: 1rem;
-        text-align: center;
+    .login-layout {
+        font-size: 0.9rem;
     }
 
+    /* ---------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
 
-    #user-container {
-        display:flex;
+    .frame-layout-login {
+        min-height:100vh;
+        max-width:100%;
+
+        display: grid;
+
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr;
+
+    }
+
+    .back-login {
+        display: flex;
         flex-direction:column;
 
-        padding: 20px;
+        justify-content: space-between;
+
+        width: 100%;
+        grid-row: 1/2;
+        grid-column: 1 / 2;
+
+        /* height: 100vh; */
     }
 
-    #user-container > input{
-        margin-top: 5px;
-        margin-bottom: 5px;
-        text-align: center;
+    .front-login {
+
+        grid-row: 1/2;
+        grid-column: 1 / 2;
+
     }
 
-    #user-img {
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 10px;
+
+    .img-top {
+        width: 100%;
+        height:auto;
+    }
+
+    .img-bottom {
+        margin-top: 1.5rem;
+        width: 100%;
+        height:auto;
+    }
+
+    /* ---------------------------------------------------------------------- */
+    /* ---------------------------------------------------------------------- */
+
+    .linear-vertical-center-login {
+
+        margin: 0.5rem auto 1.5rem auto;
+        display: flex;
+        flex-direction:column;
+
+        align-items: center;
+        justify-content: center;
+
+        /* SAME AS IN .or-container*/
+        max-width: 70%;
+
+    }
+
+    .img-login {
+        margin-bottom: 3rem;
+        width: 80%;
+    }
+
+    .or-container {
+
+        /* SAME AS IN .linear-vertical-center-login */
         width: 50%;
-        border-radius: 50%;
+
+        /* display: grid; */
+        /* grid-template-columns: 1fr 0.2fr 1fr; */
+        display: flex;
+        justify-content: space-evenly;
+
+        margin-bottom: 1rem;
+    }
+
+    .or-container > * {
+        margin: auto;
+    }
+
+    .or-span {
+        font-family: 'Avenir-Black';
+        color: #f7b2bd;
+        margin: auto;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    #btnFacebook,
+    #btnGoogle {
+        width: 100%;
+        border-radius: 30px;
+        margin-bottom: 1rem;
+    }
+
+    #btnFacebook,
+    #btnGoogle {
+        background-color: rgba(247, 178, 189, 0.5);
+        display: grid;
+        grid-template-columns: 2rem 1fr;
+    }
+
+    #btnFacebook img,
+    #btnGoogle img {
+        /* width: 50px;
+        height: 50px; */
+    }
+
+    #btnFacebook span,
+    #btnGoogle span {
+        font-family: 'Avenir-Black';
+        color: #db2763;
+        margin: auto;
+
+        /* padding-left: 3px; */
+    }
+
+    #btnSkip {
+        background-color: rgba(247, 178, 189, 0.5);
+        border-radius: 35px;
+        font-family: 'Avenir-Black';
+        color: #db2763;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
     }
 
 </style>
@@ -80,9 +206,18 @@
                 var self = this;
 
                 $("#btnGoogle").click(function () {
+
+                    app.preloader.show();
+
                     auth.loginWithGoogle(function(error){
+
+                        app.preloader.hide();
+
                         if(error){
                             //Something went wrong...
+                        } else {
+                            //Success!
+                            appNavigator.onBackPressed();
                         }
                     });
                 });
@@ -91,55 +226,14 @@
                     auth.loginWithFacebook(function(error){
                         if(error){
                             //Something went wrong...
+                        } else {
+                            //Success!
+                            appNavigator.onBackPressed();
                         }
                     });
                 });
 
-                $("#btnLogout").click(auth.logout);
-
-                $("#btnSkip").click(appNavigator.onBackPressed);    
-
-
-                auth.setLoginListener(function(user){
-
-                    //If logged in, show logout button and hide the login buttons...
-                    if(user){
-                        $("#btnLogout").show();
-
-                        $("#btnGoogle").hide();
-                        $("#btnFacebook").hide();
-                    } else {
-                        $("#btnLogout").hide();
-
-                        $("#btnGoogle").show();
-                        $("#btnFacebook").show();
-                    }
-
-                    updateProfileLayout(user);
-
-                    // console.log(JSON.stringify(user));
-                });
-
-
-                function updateProfileLayout(user){
-                    if(user){
-
-                        //Show the container and all its children:
-                        $("#user-container").show();
-                        $("#user-container").children().show();
-
-                        //Set values to fields. (This "user" is the user-firebase object...)
-                        $("#user-img").attr("src", user.photoURL);
-                        $("#user-name").val(user.displayName);
-                        $("#user-email").val(user.email);
-
-                    }else{
-
-                        //Hide the container and all its children:
-                        $("#user-container").hide();
-                        $("#user-container").children().hide();
-                    }
-                }
+                $("#btnSkip").click(appNavigator.onBackPressed);
 
             },
             pageAfterOut: function () {
