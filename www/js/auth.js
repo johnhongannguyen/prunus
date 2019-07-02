@@ -32,7 +32,9 @@ var auth = {
         var userF = firebase.auth().currentUser
 
         if(userF){
-            return new User(userF.uid, userF.photoURL, userF.displayName);
+            var u = new User(userF.uid, userF.photoURL, userF.displayName);
+            u.email = userF.email;
+            return u;
         }
 
         return null;
@@ -40,7 +42,7 @@ var auth = {
 
     getCurrentUserFromDb: function(callback){
 
-        var userF = firebase.auth().currentUser    
+        var userF = firebase.auth().currentUser
 
         //Fetch and return GeoFire object from Firebase
         firebase.database().ref('/users/' + userF.uid).once('value').then(function(snapshot) {

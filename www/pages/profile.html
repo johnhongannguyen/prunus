@@ -54,10 +54,10 @@
                 <img class="hr-profile" src="img/hr.png">
 
                 <div class="user-name">
-                    BABY GROOT
+                    {{userLocal.displayName}}
                 </div>
                 <div class="user-email">
-                    groot@avengersmail.com
+                    {{userLocal.email}}
                 </div>
 
                 <img class="hr-profile" src="img/hr.png">
@@ -380,6 +380,8 @@
                 favTree1 : "",
                 favTree2 : "",
                 favTree3 : "",
+
+                userLocal: new User(),
             }
         },
 
@@ -424,6 +426,10 @@
                 var user = auth.getCurrentUser();
                 if(user){
 
+                    self.userLocal = user;
+
+                    console.log("" + JSON.stringify(user));
+
                     //Set values to fields. (This "user" is the user-firebase object...)
                     $("#img-profile").attr("src", user.photoURL);
 
@@ -433,6 +439,8 @@
                 } else {
                     // $("#img-profile").hide();
                 }
+
+                self.$setState();
 
                 auth.getCurrentUserFromDb(function(user) {
 
@@ -454,7 +462,7 @@
                         }
 
                         if(myTrees.length > 2){
-                            self.myTrees3 = myTrees[2].img_url;                                            
+                            self.myTrees3 = myTrees[2].img_url;
                         }
 
                         self.$setState();
@@ -475,7 +483,7 @@
                         }
 
                         if(favTrees.length > 2){
-                            self.favTree3 = favTrees[2].img_url;                                            
+                            self.favTree3 = favTrees[2].img_url;
                         }
 
                         self.$setState();
