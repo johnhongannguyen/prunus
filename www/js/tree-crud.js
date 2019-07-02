@@ -23,18 +23,34 @@ var treeCRUD = {
             //Writes the geoFire object in firebase:
             geoFire.set(randomKeyId, latLng)
             .then(function() {
+
                 console.log("Provided key has been added to GeoFire");
 
-                // Writes the tree object inside the geoFire object:
-                var newTreeRef = firebaseRef.child(randomKeyId + "/tree")
 
-                .set({
+                //Now we save the tree object in the geo node, AND
+                //save the tree to the USER node at the same time:
+
+                var updates = {};
+
+                //Tree to the geo node:
+                updates['/geo/' + randomKeyId + "/tree"] = {
                     img_url: downloadURL,
                     rating: rating,
                     blooming: blooming,
                     address: address,
                     user: user
-                }, callback);
+                };
+
+                //Tree to the user node:
+                updates['/users/' + user.uid + "/trees/" + randomKeyId] = {
+                    img_url: downloadURL,
+                    rating: rating,
+                    blooming: blooming,
+                    address: address
+                }
+
+                //saving:
+                firebase.database().ref().update(updates, callback);
             });
         });
 
@@ -49,56 +65,56 @@ var treeCRUD = {
             firebase.database().ref('/users/' + user.uid + '/favorites/' + key).once('value').then(function(isFavorite) {
                 var result = snapshot.val();
                 var resultTree = new Tree(  result.tree.img_url,
-                                            result.l[0],
-                                            result.l[1],
-                                            result.tree.address,
-                                            result.tree.blooming,
-                                            result.tree.rating);
+                    result.l[0],
+                    result.l[1],
+                    result.tree.address,
+                    result.tree.blooming,
+                    result.tree.rating);
 
 
 
-                callback(resultTree, isFavorite.val())
+                    callback(resultTree, isFavorite.val())
+                });
             });
-        });
-    }
-
-}
-
-function addFileFirebase(name, file, callback) {
-
-    var the_file = dataURLtoFile(file);
-
-
-    //Create a root reference
-    var storageRef = firebase.storage().ref();
-
-    // Create a reference to 'images/name.jpg'
-    var fileRef = storageRef.child('images/' + "tree" + name + '.jpeg');
-
-    fileRef.put(the_file).then(
-        function(snapshot) {
-
-            console.log("success!!!");
-
-            snapshot.ref.getDownloadURL().then(callback);
-        },
-
-        function(error){
-            console.log("fail");
         }
-    );
 
-}
-
-
-function dataURLtoFile(dataurl) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while(n--){
-        u8arr[n] = bstr.charCodeAt(n);
     }
-    return new Blob([u8arr], {type:mime});
-}
+
+    function addFileFirebase(name, file, callback) {
+
+        var the_file = dataURLtoFile(file);
+
+
+        //Create a root reference
+        var storageRef = firebase.storage().ref();
+
+        // Create a reference to 'images/name.jpg'
+        var fileRef = storageRef.child('images/' + "tree" + name + '.jpeg');
+
+        fileRef.put(the_file).then(
+            function(snapshot) {
+
+                console.log("success!!!");
+
+                snapshot.ref.getDownloadURL().then(callback);
+            },
+
+            function(error){
+                console.log("fail");
+            }
+        );
+
+    }
+
+
+    function dataURLtoFile(dataurl) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type:mime});
+    }
 
 
 
@@ -109,4 +125,4 @@ function dataURLtoFile(dataurl) {
 
 
 
-//.
+    //.

@@ -92,9 +92,10 @@
                 </div>
 
                 <div class="children child4">
-                    <img src="{{tree.img_url}}" alt="">
                     <img src="" alt="">
                     <img src="" alt="">
+                    <img src="" alt="">
+
                 </div>
 
                 <div class="children child5">
@@ -103,9 +104,10 @@
                 </div>
 
                 <div class="children child6">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
+
+                    <img src="{{myTrees1}}" alt="">
+                    <img src="{{myTrees2}}" alt="">
+                    <img src="{{myTrees3}}" alt="">
                 </div>
             </div>
 
@@ -371,6 +373,9 @@
 
                 //...
                 tree: new Tree(),
+                myTrees1 : "",
+                myTrees2 : "",
+                myTrees3 : "",
             }
         },
 
@@ -421,9 +426,36 @@
                     // $("#user-name").val(user.displayName);
                     // $("#user-email").val(user.email);
 
-                }else{
+                } else {
                     // $("#img-profile").hide();
                 }
+
+                auth.getCurrentUserFromDb(function(user) {
+
+
+                        // console.log(Object.values(user));
+
+                        if(user.trees){
+
+                        var array = Object.values(user.trees);//Object.values(user);
+
+                        console.log(array);
+
+                        if(array.length > 0){
+                            self.myTrees1 = array[0].img_url;
+                        }
+
+                        if(array.length > 1){
+                            self.myTrees2 = array[1].img_url;
+                        }
+
+                        if(array.length > 2){
+                            self.myTrees3 = array[2].img_url;                                            
+                        }
+
+                        self.$setState();
+                    }
+                });
 
             },
             pageAfterOut: function () {

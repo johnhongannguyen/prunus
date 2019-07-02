@@ -38,6 +38,21 @@ var auth = {
         return null;
     },
 
+    getCurrentUserFromDb: function(callback){
+
+        var userF = firebase.auth().currentUser    
+
+        //Fetch and return GeoFire object from Firebase
+        firebase.database().ref('/users/' + userF.uid).once('value').then(function(snapshot) {
+
+            var result = snapshot.val();
+            // console.log(JSON.stringify(result));
+
+            callback(result);
+        })
+
+    },
+
     logout: function(callback){
 
         firebase.auth().signOut().then(callback);

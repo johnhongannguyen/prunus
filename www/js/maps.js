@@ -119,6 +119,16 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
         clearMarkers();
 
+
+        var hasInitializedNearbyTrees = false;
+        app.preloader.show();
+
+        //todo - remove this - add no-trees-nearby validation
+        setTimeout(function() {
+            app.preloader.hide();
+        }, 2000)
+
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
 
@@ -128,6 +138,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 };
 
 
+
                 //remember to cancel this geoQuery later
                 geoQuery = treeLocationService.listenToNearbyTrees(
                     [pos.lat, pos.lng],
@@ -135,6 +146,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                     function(key, location, distance) {
                         // console.log(key + " entered query at " + location + " (" + distance + " km from center)");
                         addMarker(key, location);
+
+                        if(!hasInitializedNearbyTrees){
+                            hasInitializedNearbyTrees = false;
+                            app.preloader.hide();
+                        }
 
                     },
 

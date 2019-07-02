@@ -22,6 +22,7 @@ class User {
         this.uid = uid;
         this.photoURL = photoURL;
         this.displayName = displayName;
+        
     }
 }
 
