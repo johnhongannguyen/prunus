@@ -189,7 +189,7 @@
 
                             if (self.favorite) {
                                 //Add tree to the user's list of favorites
-                                userCRUD.addTreeToFavorites(auth.getCurrentUser(), id, function() {
+                                userCRUD.addTreeToFavorites(auth.getCurrentUser(), id, self.tree, function() {
 
                                 })
                             } else {

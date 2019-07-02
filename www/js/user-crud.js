@@ -68,16 +68,21 @@ var userCRUD = {
             });
         },
 
-        addTreeToFavorites: function(user, treeID, callback) {
+        addTreeToFavorites: function(user, treeID, tree, callback) {
             console.log("In UserCRUD->addTreeToFavorites")
             // console.log(JSON.stringify(user))
             // console.log(JSON.stringify(tree))
 
             // Apparently the only way to name a JSON key from a variable's value
             // Ref: https://stackoverflow.com/questions/13833204/how-to-set-a-js-object-property-name-from-a-variable
-            var treeKey = {};
+            var treeObj = {};
             for(var i=1; i <= 1; i++) {
-                treeKey[treeID] = true;        
+                treeObj[treeID] = {
+                    img_url: tree.img_url,
+                    rating: tree.rating,
+                    blooming: tree.blooming,
+                    address: tree.address
+                }    
             }
 
             // Firebase location for storing users:
@@ -86,7 +91,7 @@ var userCRUD = {
             // Add a reference to the Tree object inside the User's favorite tree list
             var treeRef = firebaseRef.child(user.uid + "/favorites")
                 .update(
-                    treeKey
+                    treeObj
                     , callback);
         },
 
