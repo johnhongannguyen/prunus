@@ -61,24 +61,32 @@ var treeCRUD = {
         //Fetch and return GeoFire object from Firebase
         firebase.database().ref('/geo/' + key).once('value').then(function(snapshot) {
 
+            var result = snapshot.val();
+            var resultTree = new Tree(  result.tree.img_url,
+                result.l[0],
+                result.l[1],
+                result.tree.address,
+                result.tree.blooming,
+                result.tree.rating);
+
             // Check if tree exists in user's favorite trees
-            firebase.database().ref('/users/' + user.uid + '/favorites/' + key).once('value').then(function(isFavorite) {
-                var result = snapshot.val();
-                var resultTree = new Tree(  result.tree.img_url,
-                    result.l[0],
-                    result.l[1],
-                    result.tree.address,
-                    result.tree.blooming,
-                    result.tree.rating);
-
-
-
-                    callback(resultTree, isFavorite.val())
+            if (user != null) {
+                firebase.database().ref('/users/' + user.uid + '/favorites/' + key).once('value').then(function(isFavorite) {
+                    callback(resultTree, isFavorite)
                 });
-            });
-        }
+            } else {
+                callback(resultTree, false)
+            }
+        });
+    },
 
+    readBloom: function(key, callback) {
+        //Fetch and return Tree's Blooming from Firebase
+        firebase.database().ref('/geo/' + key).once('value').then(function(snapshot) {
+            callback(snapshot.val().tree.blooming)
+        })
     }
+}
 
     function addFileFirebase(name, file, callback) {
 

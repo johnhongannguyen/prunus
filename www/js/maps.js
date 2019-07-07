@@ -174,29 +174,46 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     //Adds a single marker to the map. location -> [lat,lng]
     function addMarker(key, location) {
 
-        var marker = new google.maps.Marker({
-            position: {
-                lat: location[0],
-                lng: location[1]
-            },
-            icon: {
-                // size: new google.maps.Size(10, 10),
-                scaledSize: new google.maps.Size(25,25),
-                url: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic_tree_pin.png?alt=media&token=86ede326-7f78-4196-a6a2-9d34a484b9c4"
-            },
-            zIndex: 2,
-            map: map,
-
-            key_id: key //Extra property added to the icon object.
-        });
-
-        //Segue to View Tree
-        marker.addListener('click', function() {
-            //Method to handle transition to the View Tree screen
-            appNavigator.openPageViewTree(key)
-        });
-
-        markers.push(marker);
+        var treeIcon;
+        treeCRUD.readBloom(key, function(bloom) {
+            switch (bloom) {
+                case "1":
+                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-min.png?alt=media&token=1aefd682-d90c-4aba-99ff-892f7569b994";
+                    break;
+                case "2":
+                case "3":
+                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-mid.png?alt=media&token=038dfc8d-a99d-41bf-b2a4-bafa10bc50fa";
+                    break;
+                case "4":
+                case "5":
+                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-max.png?alt=media&token=4c86ccf0-d974-426e-a725-5c5ff3c85c35";
+                    break;    
+            }
+            
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: location[0],
+                    lng: location[1]
+                },
+                icon: {
+                    // size: new google.maps.Size(10, 10),
+                    scaledSize: new google.maps.Size(25,25),
+                    url: treeIcon
+                },
+                zIndex: 2,
+                map: map,
+    
+                key_id: key //Extra property added to the icon object.
+            });
+    
+            //Segue to View Tree
+            marker.addListener('click', function() {
+                //Method to handle transition to the View Tree screen
+                appNavigator.openPageViewTree(key)
+            });
+    
+            markers.push(marker);
+        })
     }
 
     function removeMarker(key){
