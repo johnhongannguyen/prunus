@@ -96,8 +96,9 @@ var appNavigator = {
 var appLoader = {
 
     show: function(selector) {
-        $(selector).load("custom/loader/custom-loader.html");
+
         $(selector).show()
+        $(selector).load("custom/loader/custom-loader.html");
     },
 
     hide: function(selector) {

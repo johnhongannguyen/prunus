@@ -45,7 +45,7 @@
 
 
             <!-- Added programmatically -->
-            <div class="loader-map"></div>
+            <div class="loader-map loader-map-container"></div>
 
         </div>
 
@@ -66,7 +66,8 @@
 
 <script>
 
-    appLoader.show(".loader-map");
+    //This hides in map.js
+    appLoader.show(".loader-map-container");
 
     $('.nav-bar .profile').click(function(){
 
@@ -96,7 +97,7 @@
 
         // appNavigator.openPageViewTree("-LjDfDgGZzmcyRDkv0F2");
         // return;
-        
+
 
         let options = {
             quality: 80,

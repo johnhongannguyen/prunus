@@ -131,7 +131,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
         //todo - remove this - add no-trees-nearby validation
         setTimeout(function() {
-            appLoader.hide(".loader-map");
+            appLoader.hide(".loader-map-container");
         }, 6000)
 
 
@@ -155,7 +155,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
                         if(!hasInitializedNearbyTrees){
                             hasInitializedNearbyTrees = false;
-                            appLoader.hide(".loader-map");
+                            appLoader.hide(".loader-map-container");
                         }
 
                     },
