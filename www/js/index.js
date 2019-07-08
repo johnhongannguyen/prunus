@@ -97,9 +97,11 @@ var appLoader = {
 
     show: function(selector) {
         $(selector).load("custom/loader/custom-loader.html");
+        $(selector).show()
     },
 
     hide: function(selector) {
+        $(selector).hide()
         $(selector + " .loader").remove();
     }
 };
