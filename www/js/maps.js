@@ -188,6 +188,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 case "5":
                     treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-max.png?alt=media&token=4c86ccf0-d974-426e-a725-5c5ff3c85c35";
                     break;    
+                default:
+                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-fav.png?alt=media&token=28361497-c1a7-4f6e-bbee-0bdfa9e49ec4";
             }
             
             var marker = new google.maps.Marker({

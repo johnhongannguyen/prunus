@@ -295,6 +295,7 @@
                         treeCRUD.write(self.tree.img_url, [self.tree.lat, self.tree.lng], self.tree.address, self.tree.blooming, self.tree.rating, auth.getCurrentUser(), function(){
 
                             app.preloader.hide();
+                            getTreesAround()
                             appNavigator.onBackPressed();
                         });
                     }

@@ -71,9 +71,9 @@ var treeCRUD = {
 
             // Check if tree exists in user's favorite trees
             if (user != null) {
-                firebase.database().ref('/users/' + user.uid + '/favorites/' + key).once('value').then(function(isFavorite) {
-                    callback(resultTree, isFavorite.val())
-                });
+                treeCRUD.isFavorite(user.uid, key, function(isFav) {
+                    callback(resultTree, isFav)
+                })
             } else {
                 callback(resultTree, false)
             }
@@ -84,8 +84,25 @@ var treeCRUD = {
         //Fetch and return Tree's Blooming from Firebase
         firebase.database().ref('/geo/' + key).once('value').then(function(snapshot) {
             console.log(JSON.stringify(snapshot.val()))
-            callback(snapshot.val().tree.blooming)
+
+            if (auth.getCurrentUser() != null) {
+
+                // "In life, some things just can't be explained. But they simply work!"
+                //                   - Pratt (a really, really terrible and disgraceful programmer)
+                
+                treeCRUD.isFavorite(auth.getCurrentUser().uid, key, function(isFav, cb, bloom) {
+                    cb(isFav ? isFav : bloom)
+                }, callback, snapshot.val().tree ? snapshot.val().tree.blooming : null)
+            } else {
+                callback(snapshot.val().tree ? snapshot.val().tree.blooming : null)
+            }
         })
+    },
+
+    isFavorite: function(uid, key, callback, parentCallback, bloom) {
+        firebase.database().ref('/users/' + uid + '/favorites/' + key).once('value').then(function(isFavorite) {
+            callback(isFavorite.val(), parentCallback, bloom)
+        });
     }
 }
 
