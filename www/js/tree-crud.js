@@ -72,7 +72,7 @@ var treeCRUD = {
             // Check if tree exists in user's favorite trees
             if (user != null) {
                 firebase.database().ref('/users/' + user.uid + '/favorites/' + key).once('value').then(function(isFavorite) {
-                    callback(resultTree, isFavorite)
+                    callback(resultTree, isFavorite.val())
                 });
             } else {
                 callback(resultTree, false)
@@ -83,6 +83,7 @@ var treeCRUD = {
     readBloom: function(key, callback) {
         //Fetch and return Tree's Blooming from Firebase
         firebase.database().ref('/geo/' + key).once('value').then(function(snapshot) {
+            console.log(JSON.stringify(snapshot.val()))
             callback(snapshot.val().tree.blooming)
         })
     }
