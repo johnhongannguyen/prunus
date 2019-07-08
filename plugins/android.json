@@ -16,6 +16,9 @@
     "cordova-plugin-googleplus": {
       "PLAY_SERVICES_VERSION": "11.8.0",
       "PACKAGE_NAME": "com.phonegap.prunusapp"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.phonegap.prunusapp"
     }
   },
   "dependent_plugins": {}

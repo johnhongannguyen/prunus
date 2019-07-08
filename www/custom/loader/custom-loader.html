@@ -1,0 +1,113 @@
+
+<div class="loader">
+    <img id="loader-bubble" src="custom/loader/ic_load_bubbles.png" alt="">
+    <img id="loader-flower" src="custom/loader/ic_load_flower.png" alt="">
+</div>
+
+
+<style>
+
+    .loader  {
+        /* To fix issue on some pcs */
+        backface-visibility: hidden;
+
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(239,39,99,0.15);
+    }
+
+    #loader-flower, #loader-bubble {
+
+        width: 90px;
+        height: 90px;
+
+        position: absolute;
+
+        /* Centralizing the headingBox in the center of parent */
+        top: 50%;
+        left:50%;
+
+        margin-left: -45px;
+        margin-top: -45px;
+        /* transform: translate(-50%, -50%); */
+
+    }
+
+    #loader-flower {
+        /* You can also throw a delay here at the end */
+        animation: rotate 4s linear infinite;
+    }
+
+    #loader-bubble {
+
+        width: 80px;
+        height: 80px;
+
+        margin-left: -40px;
+        margin-top: -40px;
+
+        animation: bounceIn 2s linear infinite;
+    }
+
+    @keyframes rotate{
+        0% {
+            transform: rotate(0deg);
+        }
+
+        50% {
+            transform: rotate(100deg);
+        }
+
+        80% {
+            transform: rotate(280deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes bounceIn {
+        from,
+        20%,
+        40%,
+        60%,
+        80%,
+        to {
+            /* -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); */
+        }
+
+        0% {
+            opacity: 0.7;
+            transform: scale3d(0.8, 0.8, 0.8);
+        }
+
+        20% {
+            opacity: 0.9;
+            transform: scale3d(0.97, 0.97, 0.97);
+        }
+
+        40% {
+            opacity: 1;
+            transform: scale3d(1, 1, 1);
+        }
+
+        60% {
+            opacity: 0.8;
+            transform: scale3d(0.97, 0.97, 0.97);
+        }
+
+        80% {
+            opacity: 0.9;
+            transform: scale3d(0.9, 0.9, 0.9);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale3d(0.8, 0.8, 0.8);
+        }
+    }
+
+</style>

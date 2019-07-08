@@ -36,30 +36,38 @@
             </div>
         </div>
 
-        <div id="map" class="elevation-4">
-            <!-- Google map will be added here programmatically. -->
+
+        <div class="custom-loader">
+
+            <div id="map" class="elevation-4 loader-map">
+                <!-- Google map will be added here programmatically. -->
+            </div>
+
+
+            <!-- Added programmatically -->
+            <div class="loader-map loader-map-container"></div>
+
         </div>
 
 
         <!-- <button onclick="myLocation()">My location</button>
         <button onclick="getTreesAround()">Get trees around</button> -->
 
-<div class="fab camera-button color-black">
-    <a href="#">
-        <img src="img/ic_add_btn.png" alt="Add tree icon">
-    </a>
+        <div class="fab camera-button color-black">
+            <a href="#">
+                <img src="img/ic_add_btn.png" alt="Add tree icon">
+            </a>
 
-</div>
-<!-- </div> -->
-</div>
+        </div>
+        <!-- </div> -->
+    </div>
 </div>
 <!-- END OF PAGE CONTENT -->
 
 <script>
 
-    // setTimeout(() => {
-    //     appNavigator.openPageProfile();
-    // }, 1500)
+    //This hides in map.js
+    appLoader.show(".loader-map-container");
 
     $('.nav-bar .profile').click(function(){
 
@@ -89,7 +97,7 @@
 
         // appNavigator.openPageViewTree("-LjDfDgGZzmcyRDkv0F2");
         // return;
-        
+
 
         let options = {
             quality: 80,

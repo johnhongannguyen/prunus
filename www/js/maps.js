@@ -13,10 +13,15 @@ var contentString =
 var geoQuery = null;
 var markers = [];
 
-
 var pos;
 
+var MAP_ICON_USER_SIZE;
+var MAP_ICON_TREE_SIZE;
+
 function initMap() {
+
+    MAP_ICON_USER_SIZE = new google.maps.Size(28, 32);
+    MAP_ICON_TREE_SIZE = new google.maps.Size(25, 25);
 
     map = new google.maps.Map(document.getElementById('map'), {
         // center: {lat: -34.397, lng: 150.644},
@@ -24,6 +29,8 @@ function initMap() {
         disableDefaultUI: true,
         mapTypeId: 'roadmap'
     });
+
+
 
     infoWindow = new google.maps.InfoWindow;
 
@@ -39,7 +46,7 @@ function initMap() {
                 position: pos,
                 icon: {
                     // size: new google.maps.Size(10, 10),
-                    scaledSize: new google.maps.Size(25,28),
+                    scaledSize: MAP_ICON_USER_SIZE,
                     url: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fmy_location_91x104.png?alt=media&token=ff826d46-91bf-4fea-9af3-13147f13382f"
                 },
                 zIndex: 1,
@@ -86,7 +93,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                     position: pos,
                     icon: {
                         // size: new google.maps.Size(10, 10),
-                        scaledSize: new google.maps.Size(25,28),
+                        scaledSize: MAP_ICON_USER_SIZE,
                         url: "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fmy_location_91x104.png?alt=media&token=ff826d46-91bf-4fea-9af3-13147f13382f"
                     },
                     zIndex: 1,
@@ -121,12 +128,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 
         var hasInitializedNearbyTrees = false;
-        app.preloader.show();
 
         //todo - remove this - add no-trees-nearby validation
         setTimeout(function() {
-            app.preloader.hide();
-        }, 2000)
+            appLoader.hide(".loader-map-container");
+        }, 6000)
 
 
         if (navigator.geolocation) {
@@ -149,7 +155,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
                         if(!hasInitializedNearbyTrees){
                             hasInitializedNearbyTrees = false;
-                            app.preloader.hide();
+                            appLoader.hide(".loader-map-container");
                         }
 
                     },
@@ -178,20 +184,21 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         treeCRUD.readBloom(key, function(bloom) {
             switch (bloom) {
                 case "1":
-                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-min.png?alt=media&token=1aefd682-d90c-4aba-99ff-892f7569b994";
-                    break;
+                treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-min.png?alt=media&token=1aefd682-d90c-4aba-99ff-892f7569b994";
+                break;
                 case "2":
                 case "3":
-                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-mid.png?alt=media&token=038dfc8d-a99d-41bf-b2a4-bafa10bc50fa";
-                    break;
+                treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-mid.png?alt=media&token=038dfc8d-a99d-41bf-b2a4-bafa10bc50fa";
+                break;
                 case "4":
                 case "5":
                     treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-max.png?alt=media&token=4c86ccf0-d974-426e-a725-5c5ff3c85c35";
                     break;    
                 default:
                     treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-fav.png?alt=media&token=28361497-c1a7-4f6e-bbee-0bdfa9e49ec4";
+
             }
-            
+
             var marker = new google.maps.Marker({
                 position: {
                     lat: location[0],
@@ -199,21 +206,21 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 },
                 icon: {
                     // size: new google.maps.Size(10, 10),
-                    scaledSize: new google.maps.Size(25,25),
+                    scaledSize: MAP_ICON_TREE_SIZE,
                     url: treeIcon
                 },
                 zIndex: 2,
                 map: map,
-    
+
                 key_id: key //Extra property added to the icon object.
             });
-    
+
             //Segue to View Tree
             marker.addListener('click', function() {
                 //Method to handle transition to the View Tree screen
                 appNavigator.openPageViewTree(key)
             });
-    
+
             markers.push(marker);
         })
     }

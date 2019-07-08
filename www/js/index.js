@@ -92,6 +92,22 @@ var appNavigator = {
     }
 };
 
+
+var appLoader = {
+
+    show: function(selector) {
+
+        $(selector).show()
+        $(selector).load("custom/loader/custom-loader.html");
+    },
+
+    hide: function(selector) {
+        $(selector).hide()
+        $(selector + " .loader").remove();
+    }
+};
+
+
 var appConfig = {
 
     // Application Constructor
