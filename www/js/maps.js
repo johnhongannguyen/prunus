@@ -121,12 +121,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 
         var hasInitializedNearbyTrees = false;
-        app.preloader.show();
 
         //todo - remove this - add no-trees-nearby validation
         setTimeout(function() {
-            app.preloader.hide();
-        }, 2000)
+            appLoader.hide(".loader-map");
+        }, 6000)
 
 
         if (navigator.geolocation) {
@@ -149,7 +148,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
                         if(!hasInitializedNearbyTrees){
                             hasInitializedNearbyTrees = false;
-                            app.preloader.hide();
+                            appLoader.hide(".loader-map");
                         }
 
                     },
@@ -187,9 +186,9 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 case "4":
                 case "5":
                     treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-max.png?alt=media&token=4c86ccf0-d974-426e-a725-5c5ff3c85c35";
-                    break;    
+                    break;
             }
-            
+
             var marker = new google.maps.Marker({
                 position: {
                     lat: location[0],
@@ -202,16 +201,16 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 },
                 zIndex: 2,
                 map: map,
-    
+
                 key_id: key //Extra property added to the icon object.
             });
-    
+
             //Segue to View Tree
             marker.addListener('click', function() {
                 //Method to handle transition to the View Tree screen
                 appNavigator.openPageViewTree(key)
             });
-    
+
             markers.push(marker);
         })
     }
