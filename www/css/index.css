@@ -122,6 +122,7 @@ html, body {
 
 .icons img {
     height: 25px;
+    object-fit: contain;
 }
 
 .camera-button, #btn-register-tree {

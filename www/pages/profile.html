@@ -16,9 +16,9 @@
 
                 <div class="title">Profile</div>
 
-                <div class="icons settings">
+                <div class="icons logout">
                     <!-- This div is just a placeholder now -->
-                    <img src="img/ic_settings.png" alt="Settings">
+                    <img src="img/ic_logout.png" alt="Logout">
                 </div>
             </div>
 
@@ -36,6 +36,13 @@
                         <div class="img-profile-white-back"></div>
                         <img src="img/img_profile_photo_bg.png">
                         <img id="img-profile" class="elevation-4">
+
+
+                        <div class="ic-edit-wrapper">
+                            <div class="icon-edit">
+                                <img src="img/ic_edit.png">
+                            </div>
+                        </div>
 
                     </div>
 
@@ -82,7 +89,7 @@
 
                 <div class="children child2">
                     <div class="icon-black elevation-4">
-                        <img src="img/ic-plant-seed.png">
+                        <img src="img/ic_star_profile.png">
                     </div>
                 </div>
 
@@ -191,176 +198,203 @@
         height: 40px;
     }
 
-    .child2 .icon-black {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
+    /* .child2 .icon-black {
+    padding-left: 10px;
+    padding-right: 10px;
+} */
 
-    .child2 img {
-        height: 100%;
-    }
+/* .child2 img {
+height: 100%;
+} */
 
-    .child7 img {
-        width: 8px;
-        height:100%;
-    }
-    /* ---------------------------------------------------------------------- */
-    /* ---------------------------------------------------------------------- */
-
-
-    .child3, .child5 {
-        display: flex;
-        align-items: center;
-
-        justify-content: space-between;
-    }
-
-    .child3 .right,
-    .child5 .right {
-        color: #f7b2bd;
-    }
-
-    /* ---------------------------------------------------------------------- */
-    /* ---------------------------------------------------------------------- */
-
-    .child4,
-    .child6 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-
-        grid-gap: 10px;
-    }
-
-    .child4 img,
-    .child6 img {
-        flex-grow: 1;
-        flex-basis: 0;
-        height: 100%;
-        background-color: #f7b2bd;
-    }
+.child7 img {
+    width: 8px;
+    height:100%;
+}
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- */
 
 
-    /* ---------------------------------------------------------------------- */
-    /* ---------------------------------------------------------------------- */
-    /* Mid part: */
+.child3, .child5 {
+    display: flex;
+    align-items: center;
 
-    .linear-vertical-center {
+    justify-content: space-between;
+}
 
-        margin: 0.5rem auto 1.5rem auto;
-        display: flex;
-        flex-direction:column;
+.child3 .right,
+.child5 .right {
+    color: #f7b2bd;
+}
 
-        align-items: center;
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- */
 
-        width: 70%;
-    }
+.child4,
+.child6 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 
-    .hr-profile {
-        display:block;
-        margin: auto;
-        max-width : 100%;
-    }
+    grid-gap: 10px;
+}
 
-    .user-name {
-        margin-top: 1rem;
-    }
-
-    .user-email {
-        margin-bottom: 1rem;
-        color: #f7b2bd;
-    }
-
-    /* ---------------------------------------------------------------------- */
-    /* ---------------------------------------------------------------------- */
-    /* Top part: */
-    /* 200px and 100px image impacting the variables!!! */
-
-    .img-profile-container {
-        width: 100%;
-        align-self: flex-end;
-
-        display: grid;
-
-        grid-template-rows: 100px 100px;
-        grid-template-columns: 1fr;
-    }
-
-    .img-profile-white-back {
-        background-color: #fff;
-        width: 100%;
-        height: 200px;
-
-        grid-row: 2/3;
-        grid-column: 1 / 2;
-    }
-
-    .img-profile-container img {
-        margin: auto;
-
-        width: 200px;
-        height: 200px;
-
-        grid-row: 1/3;
-        grid-column: 1 / 2;
-    }
-
-    #img-profile {
-
-        width: 170px;
-        height: 170px;
-
-        background-color: #fff;
-        border-radius: 50%;
-    }
+.child4 img,
+.child6 img {
+    flex-grow: 1;
+    flex-basis: 0;
+    height: 100%;
+    background-color: #f7b2bd;
+}
 
 
-    /* ... */
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- */
+/* Mid part: */
+
+.linear-vertical-center {
+
+    margin: 0.5rem auto 1.5rem auto;
+    display: flex;
+    flex-direction:column;
+
+    align-items: center;
+
+    width: 70%;
+}
+
+.hr-profile {
+    display:block;
+    margin: auto;
+    max-width : 100%;
+}
+
+.user-name {
+    margin-top: 1rem;
+}
+
+.user-email {
+    margin-bottom: 1rem;
+    color: #f7b2bd;
+}
+
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- */
+/* Top part: */
+/* 200px and 100px image impacting the variables!!! */
+
+
+.img-profile-container {
+    width: 100%;
+    align-self: flex-end;
+
+    display: grid;
+
+    grid-template-rows: 100px 100px;
+    grid-template-columns: 1fr;
+}
+
+.img-profile-white-back {
+    background-color: #fff;
+    width: 100%;
+    height: 200px;
+
+    grid-row: 2/3;
+    grid-column: 1 / 2;
+}
+
+/*  */
+.img-profile-container > img {
+    margin: auto;
+
+    width: 200px;
+    height: 200px;
+
+    grid-row: 1/3;
+    grid-column: 1 / 2;
+}
+
+.ic-edit-wrapper {
+    margin: auto;
+
+    width: 200px;
+    height:200px;
+
+    display: flex;
+    align-items: flex-end;
+
+    grid-row: 1/3;
+    grid-column: 1 / 2;
+}
+
+.icon-edit {
+    margin: 0 auto -2px auto;
+    padding: 8px;
+    text-align: center;
+
+    background-color: #db2763;
+    border-radius: 50%;
+
+    width: 33px;
+    height: 33px;
+}
+
+#img-profile {
+
+    width: 170px;
+    height: 170px;
+
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+
+/* ... */
 
 
 
-    .frame-layout {
-        display: grid;
+.frame-layout {
+    display: grid;
 
-        grid-template-rows: 1fr;
-        grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
 
-    }
+}
 
-    .back {
-        display: flex;
-        background-image: linear-gradient(#EB3974, #f5d0c5);
-        width: 100%;
-        grid-row: 1/2;
-        grid-column: 1 / 2;
+.back {
+    display: flex;
+    background-image: linear-gradient(#EB3974, #f5d0c5);
+    width: 100%;
+    grid-row: 1/2;
+    grid-column: 1 / 2;
 
-        height: 35vh;
+    height: 35vh;
 
-    }
+}
 
-    .front {
+.front {
 
-        display: flex;
+    display: flex;
 
-        /* background-color: rgba(60,85,47, 0.5); */
-        width: 100%;
-        grid-row: 1/2;
-        grid-column: 1 / 2;
+    /* background-color: rgba(60,85,47, 0.5); */
+    width: 100%;
+    grid-row: 1/2;
+    grid-column: 1 / 2;
 
-        height: calc(35vh + 100px);
+    height: calc(35vh + 100px);
 
-    }
+}
 
-    .back img {
-        align-self: flex-end;
-        width: 100%;
-        object-fit: cover;
-    }
+.back img {
+    align-self: flex-end;
+    width: 100%;
+    object-fit: cover;
+}
 
-    .img-bottom {
-        margin-top: 1.5rem;
-        margin-bottom: -10px;
-        width: 100%;
-    }
+.img-bottom {
+    margin-top: 1.5rem;
+    margin-bottom: -10px;
+    width: 100%;
+}
 
 </style>
 <!-- rest of component data and methods -->
@@ -412,10 +446,14 @@
                     appNavigator.onBackPressed();
                 });
 
-                $(".settings").click(function (){
-                    // alert("Settings");
+                $(".logout").click(function (){
 
-                    appNavigator.openPageSettings();
+                    auth.logout(function(){
+
+                        //Refreshes the app (Will go back to map view)
+                        location.reload(true);
+                    });
+
                 });
 
 
@@ -445,7 +483,7 @@
                 auth.getCurrentUserFromDb(function(user) {
 
 
-                        // console.log(Object.values(user));
+                    // console.log(Object.values(user));
 
                     if(user.trees){
 

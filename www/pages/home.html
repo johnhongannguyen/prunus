@@ -30,9 +30,9 @@
 
             <div class="title">Prunus</div>
 
-            <div>
+            <div class="icons settings">
                 <!-- This div is just a placeholder now -->
-                <!-- <img src="img/ic_profile.png" alt="Profile"> -->
+                <img src="img/ic_settings.png" alt="Settings">
             </div>
         </div>
 
@@ -57,6 +57,10 @@
 
 <script>
 
+    // setTimeout(() => {
+    //     appNavigator.openPageProfile();
+    // }, 1500)
+
     $('.nav-bar .profile').click(function(){
 
         if(auth.getCurrentUser()){
@@ -65,6 +69,12 @@
             appNavigator.openPageLogin();
         }
 
+    });
+
+    $(".settings").click(function (){
+        // alert("Settings");
+
+        appNavigator.openPageSettings();
     });
 
 
