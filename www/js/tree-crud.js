@@ -83,7 +83,7 @@ var treeCRUD = {
     readBloom: function(key, callback) {
         //Fetch and return Tree's Blooming from Firebase
         firebase.database().ref('/geo/' + key).once('value').then(function(snapshot) {
-            console.log(JSON.stringify(snapshot.val()))
+            // console.log(JSON.stringify(snapshot.val()))
 
             if (auth.getCurrentUser() != null) {
 

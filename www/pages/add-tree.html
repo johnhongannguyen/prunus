@@ -72,7 +72,7 @@
 
 
                     <div class="tree-address-container">
-                        <img id="ic_tree_address" src="img/ic_tree_address.png" alt="">
+                        <img id="ic_tree_address" src="img/ic_my_location_91x104.png" alt="">
                         <div id="tree-address-load" class="preloader color-red"></div>
                         <span id="tree-address"></span>
                     </div>
@@ -172,12 +172,13 @@
 
                 //Getting the tree from the router:
                 self.tree = mainView.router.currentRoute.context.tree;
+                // console.log(JSON.stringify(self.tree))
                 self.$setState();    //Forcing the view to reset
 
                 $(".rating").load("custom/rating/custom-rating.html", function() {
                     $('custom-rating').on('rate', () => {
 
-                        console.log("new value..");
+                        console.log("new value.." + $('custom-rating').val());
                         //new value assigned:
                         self.tree.rating = $('custom-rating').val();
                         console.log("...done!");

@@ -225,24 +225,24 @@ html, body {
 
 .tree-address-container{
     display: grid;
-    grid-template-columns: 30px 1fr;
-}
-
-
-.tree-address-container{
+    grid-template-columns: 15px 1fr;
     padding-top: 1rem;
     /* margin-top: 1rem; */
+    margin: 0px 10%;
 }
 
 #ic_tree_address {
+    height: 1.2rem;
+    width: auto;
     max-width: 30px;
+    text-align: center;
 }
 
 #tree-address {
     padding-left: 0.5rem;
     color: #db2763;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+    font-size: .9rem;
+    /* margin-bottom: 1rem; */
 }
 
 .top-border {
