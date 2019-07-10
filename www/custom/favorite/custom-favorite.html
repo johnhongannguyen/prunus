@@ -20,11 +20,26 @@ console.log(newVal);`
 <!-- $('custom-favorite').prop('enabled', false); -->
 
 <custom-favorite>
+    <img id="loader-bubble-fav" src="custom/favorite/ic_load_bubbles.png" alt="">
 </custom-favorite>
 
 <style>
     custom-favorite {
         display:flex;
+    }
+
+    #loader-bubble-fav {
+        position: absolute;
+        margin-left: 3px;
+        margin-right: 3px;
+        width:90px;
+        height:90px;
+        opacity: 0;
+        z-index: 0;
+    }
+
+    #loader-bubble-fav.full {
+        animation: bounceIn 2s linear 1;
     }
 
     custom-favorite > .star {
@@ -45,8 +60,37 @@ console.log(newVal);`
         height:90px;
 
         /* Path is actually from the page that is calling... */
-        background-image: url('custom/favorite/ic_love.png');
+        background-image: url('custom/favorite/ic_love_2.png');
+        background-position: left top, left top;
         background-size: cover;
+        z-index: 1;
+    }
+
+    @keyframes bounceIn {
+        0% {
+            opacity: 1;
+            transform: scale3d(0.3, 0.3, 0.3);
+        }
+        
+        30% {
+            opacity: 0.8;
+            transform: scale3d(0.8, 0.8, 0.8);
+        }
+
+        65% {
+            
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+
+        70% {
+            opacity: 0;
+            transform: scale3d(1.25, 1.25, 1.25);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale3d(1.3, 1.3, 1.3);
+        }
     }
 </style>
 
@@ -92,6 +136,9 @@ console.log(newVal);`
         select(index){
             this.hearts.forEach((heart,i) => {
                 heart.classList.toggle('full', i <= index );
+                if (document.getElementById("loader-bubble-fav") != null) {
+                    document.getElementById("loader-bubble-fav").classList.toggle('full', i <= index );
+                }
             });
         }
 
