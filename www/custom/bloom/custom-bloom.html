@@ -27,7 +27,7 @@ console.log(newVal);
         display:flex;
     }
 
-    custom-bloom > .star {
+    custom-bloom > .wrapper > .star {
         margin-left: 3px;
         margin-right: 3px;
         width:45px;
@@ -35,10 +35,12 @@ console.log(newVal);
 
         /* Path is actually from the page that is calling... */
         background-image: url('custom/bloom/ic_bloom_empty.png');
+        position: relative;
+        z-index: initial;
         background-size: cover;
     }
 
-    custom-bloom > .star.full {
+    custom-bloom > .wrapper > .star.full {
         margin-left: 3px;
         margin-right: 3px;
         width:45px;
@@ -47,6 +49,52 @@ console.log(newVal);
         /* Path is actually from the page that is calling... */
         background-image: url('custom/bloom/ic_bloom_full.png');
         background-size: cover;
+    }
+
+    custom-bloom > .wrapper > .star.full > .bubbles {
+        animation: bounceIn 1s linear 1;
+    }
+
+    .wrapper {
+        z-index: 10;
+        position: relative;
+    }
+
+    .bubbles {
+        position: relative;
+        width:45px;
+        height:45px;
+        background-image: url('custom/bloom/ic_load_bubbles.png');
+        background-size: cover;
+        z-index: -1;
+        opacity: 0;
+    }
+
+    @keyframes bounceIn {
+        0% {
+            opacity: 1;
+            transform: scale3d(0.3, 0.3, 0.3);
+        }
+        
+        30% {
+            opacity: 0.8;
+            transform: scale3d(0.8, 0.8, 0.8);
+        }
+
+        65% {
+            
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+
+        70% {
+            opacity: 0;
+            transform: scale3d(1.25, 1.25, 1.25);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale3d(1.3, 1.3, 1.3);
+        }
     }
 </style>
 
@@ -76,9 +124,18 @@ console.log(newVal);
             this.stars = [];
 
             for (var i = 0; i < 5; i++) {
+                let wrapper = document.createElement('div');
+                wrapper.className = 'wrapper';
+
+                let bg = document.createElement('div');
+                bg.className = 'bubbles';
+
                 let s = document.createElement('div');
                 s.className = 'star';
-                this.appendChild(s);
+                s.appendChild(bg)
+                wrapper.appendChild(s)
+
+                this.appendChild(wrapper);
                 this.stars.push(s);
             }
 
@@ -92,6 +149,12 @@ console.log(newVal);
         select(index){
             this.stars.forEach((star,i) => {
                 star.classList.toggle('full', i <= index );
+                $(star).html("")
+                if (i <= index) {
+                    let bg = document.createElement('div');
+                    bg.className = 'bubbles';
+                    star.appendChild(bg)
+                }
             });
         }
 
@@ -105,6 +168,7 @@ console.log(newVal);
 
                     //get current position:
                     var pos = 0;
+                    currentChild = currentChild.parentElement
                     while( (currentChild = currentChild.previousSibling) != null ){
                         pos++;
                     }
