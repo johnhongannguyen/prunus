@@ -11,7 +11,7 @@
                 <div id="group1">
 
                     <div class="background">
-                        
+                        <img id="back-arrow" src="img/ic_back.png" alt="Back">
                         <img id="img-tree" src="{{tree.img_url}}">
                     </div>
 
@@ -158,7 +158,9 @@
                 var self = this;
                 console.log('view-tree initialized');
 
-
+                $("#back-arrow").click(function (){
+                    appNavigator.onBackPressed();
+                });
 
 
                 //Getting the ID for the tree from the router.
