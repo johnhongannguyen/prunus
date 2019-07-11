@@ -34,63 +34,107 @@ console.log(newVal);
     }
 
     /* Basic style for all emotions */
-    custom-rating > .star {
+    custom-rating > .wrapper > .star {
         margin-left: 3px;
         margin-right: 3px;
         width:45px;
         height:45px;
-        transition: height .5s, width .5s;
-
+        /* transition: height .5s, width .5s; */
+        position: relative;
+        z-index: initial;
         background-size: cover;
     }
 
     /* Overwrite dimensions for the selected emotion */
-    custom-rating > .star.full {
-        width:55px;
-        height:55px;
-        transition: height .5s, width .5s;
+    custom-rating > .wrapper > .star.full > .bubbles {
+        /* width:55px;
+        height:55px; */
+        /* transition: height .5s, width .5s; */
+        animation: bounceIn 1s linear 1;
+    }
+
+    .wrapper {
+        z-index: 10;
+        position: relative;
+    }
+
+    .bubbles {
+        position: relative;
+        width:45px;
+        height:45px;
+        background-image: url('custom/rating/ic_load_bubbles.png');
+        background-size: cover;
+        z-index: -1;
+        opacity: 0;
     }
 
     /* Enabled and Disabled styles for every emotion */
     /* Path is actually from the page that is calling... */
-    custom-rating > .star.em1 {
+    custom-rating > .wrapper > .star.em1 {
         background-image: url('custom/rating/emotion-1-disabled.png');
     }
 
-    custom-rating > .star.em1.full {
-        background-image: url('custom/rating/emotion-1-enabled.png');
+    custom-rating > .wrapper > .star.em1.full {
+        background-image: url('custom/rating/emotion-1-en.png');
     }
 
-    custom-rating > .star.em2 {
+    custom-rating > .wrapper > .star.em2 {
         background-image: url('custom/rating/emotion-2-disabled.png');
     }
 
-    custom-rating > .star.em2.full {
-        background-image: url('custom/rating/emotion-2-enabled.png');
+    custom-rating > .wrapper > .star.em2.full {
+        background-image: url('custom/rating/emotion-2-en.png');
     }
 
-    custom-rating > .star.em3 {
+    custom-rating > .wrapper > .star.em3 {
         background-image: url('custom/rating/emotion-3-disabled.png');
     }
 
-    custom-rating > .star.em3.full {
-        background-image: url('custom/rating/emotion-3-enabled.png');
+    custom-rating > .wrapper > .star.em3.full {
+        background-image: url('custom/rating/emotion-3-en.png');
     }
 
-    custom-rating > .star.em4 {
+    custom-rating > .wrapper > .star.em4 {
         background-image: url('custom/rating/emotion-4-disabled.png');
     }
 
-    custom-rating > .star.em4.full {
-        background-image: url('custom/rating/emotion-4-enabled.png');
+    custom-rating > .wrapper > .star.em4.full {
+        background-image: url('custom/rating/emotion-4-en.png');
     }
 
-    custom-rating > .star.em5 {
+    custom-rating > .wrapper > .star.em5 {
         background-image: url('custom/rating/emotion-5-disabled.png');
     }
 
-    custom-rating > .star.em5.full {
-        background-image: url('custom/rating/emotion-5-enabled.png');
+    custom-rating > .wrapper > .star.em5.full {
+        background-image: url('custom/rating/emotion-5-en.png');
+    }
+
+    @keyframes bounceIn {
+        0% {
+            opacity: 1;
+            transform: scale3d(0.3, 0.3, 0.3);
+        }
+        
+        30% {
+            opacity: 0.8;
+            transform: scale3d(0.8, 0.8, 0.8);
+        }
+
+        65% {
+            
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+
+        70% {
+            opacity: 0;
+            transform: scale3d(1.25, 1.25, 1.25);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale3d(1.3, 1.3, 1.3);
+        }
     }
 </style>
 
@@ -120,9 +164,18 @@ console.log(newVal);
             this.stars = [];
 
             for (var i = 0; i < 5; i++) {
+                let wrapper = document.createElement('div');
+                wrapper.className = 'wrapper';
+
+                let bg = document.createElement('div');
+                bg.className = 'bubbles';
+                
                 let s = document.createElement('div');
                 s.className = 'star em'+(i+1);
-                this.appendChild(s);
+                s.appendChild(bg)
+                wrapper.appendChild(s)
+
+                this.appendChild(wrapper);
                 this.stars.push(s);
             }
 
@@ -146,9 +199,10 @@ console.log(newVal);
                     //Get current child:
                     e = e || window.event;
                     var currentChild = e.target || e.srcElement, text = currentChild.textContent || currentChild.innerText;
-
+                    // console.log(currentChild.className)
                     //get current position:
                     var pos = 0;
+                    currentChild = currentChild.parentElement
                     while( (currentChild = currentChild.previousSibling) != null ){
                         pos++;
                     }
