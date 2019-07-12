@@ -19,7 +19,7 @@
                         <div class="foreground user-reaction bottom-border top-border">
 
                             <img src="img/pin-flower-shadow.png" alt="Pin Flower" class="pin-flower">
-                            
+
                             <div class="field input-section">
                                 <div class="favorite">
                                     <!-- custom-favorite element will go here -->
@@ -44,7 +44,7 @@
                             </div>
 
                             <!-- BLOOM -->
-                            <div class="field input-section">
+                            <div class="field input-section input-section-bloom">
                                 <!-- <div id="title-bloom" class="section-title">BLOOM</div> -->
                                 <div class="bloom">
                                     <!-- custom-bloom element will go here -->
@@ -54,49 +54,57 @@
                             <div class="hr-wrapper">
                                 <img class="hr" src="img/hr.png" alt="hr">
                             </div>
-                            
-                            
+
+
 
                             <!-- STATUS -->
                             <!-- <div class="field input-section">
-                                <div class="section-title">STATUS</div>
-                                <div class="status-flex-box">
-                                    <div data-bloom="1" class="elevation-4">Blossoming</div>
-                                    <div data-bloom="2" class="elevation-4">Growing</div>
-                                    <div data-bloom="3" class="elevation-4">Blooming</div>
-                                </div>
-                            </div>
-
-                            <div class="hr-wrapper">
-                                <img class="hr" src="img/hr.png" alt="hr">
-                            </div> -->
-
-
-                            <!-- LOCATION -->
-                            <div class="field input-section">
-                                <!-- <div class="section-title">LOCATION</div> -->
-                                <div class="flex-box hidden">
-                                    <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
-                                    <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
-                                </div>
-
-                                <div class="tree-address-container">
-                                    <img id="ic_tree_address" src="img/ic_my_location_91x104.png" alt="">
-                                    <span id="tree-address">{{tree.address}}</span>
-                                </div>
-                            </div>
+                            <div class="section-title">STATUS</div>
+                            <div class="status-flex-box">
+                            <div data-bloom="1" class="elevation-4">Blossoming</div>
+                            <div data-bloom="2" class="elevation-4">Growing</div>
+                            <div data-bloom="3" class="elevation-4">Blooming</div>
                         </div>
+                    </div>
+
+                    <div class="hr-wrapper">
+                    <img class="hr" src="img/hr.png" alt="hr">
+                </div> -->
+
+
+                <!-- LOCATION -->
+                <div class="field input-section">
+                    <!-- <div class="section-title">LOCATION</div> -->
+                    <div class="flex-box hidden">
+                        <span>Latitude: <span id="lat">{{tree.lat}}</span></span>
+                        <span>Longitude: <span id="lng">{{tree.lng}}</span></span>
+                    </div>
+
+                    <div class="tree-address-container">
+                        <img id="ic_tree_address" src="img/ic_my_location_91x104.png" alt="">
+                        <span id="tree-address">{{tree.address}}</span>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
+</div>
+
+</div>
+
+</div>
 
 </template>
 <!-- component styles -->
 <style>
+
+    .input-section-rating {
+        margin-bottom: -1rem;
+    }
+
+    .input-section-bloom {
+        margin-bottom: -0.3rem;
+    }
 
     .user-reaction {
         padding: 1rem;
