@@ -7,7 +7,62 @@
         <!-- Scrollable PAGE CONTENT-->
         <div class="page-content settings-layout">
 
-            <button type="button" class="button elevation-4" id="btnLogout">Logout</button>
+
+            <div class="settings-wrapper">
+                <div class="nav-bar">
+
+                    <div class="icons back-arrow">
+                        <!-- This div is just a placeholder now -->
+                        <img src="img/ic_back.png" alt="Back">
+                    </div>
+
+                    <div class="title">Settings</div>
+
+                    <div class="icons logout">
+                        <!-- This div is just a placeholder now -->
+                        <!-- <img src="img/ic_logout.png" alt="Logout"> -->
+                    </div>
+                </div>
+
+                <div class="settings-content">
+
+                    <div class="settings-content-menu elevation-2">
+                        <div class="btn-notifications">
+                            <img class="icon-round-pink" src="img/ic_notification.png" alt="">
+                            <span>Notifications</span>
+                        </div>
+                        <hr>
+                        <div class="btn-notifications">
+                            <img class="icon-round-pink" src="img/ic_about.png" alt="">
+                            <span>About</span>
+                        </div>
+                        <hr>
+                        <div class="btn-notifications">
+                            <img class="icon-round-pink" src="img/ic_privacy.png" alt="">
+                            <span>Privacy</span>
+                        </div>
+                        <hr>
+                        <div class="btn-notifications">
+                            <img class="icon-round-pink" src="img/ic_security.png" alt="">
+                            <span>Security</span>
+                        </div>
+                        <hr>
+                        <div class="btn-notifications">
+                            <img class="icon-round-pink" src="img/ic_account.png" alt="">
+                            <span>Account</span>
+                        </div>
+                        <hr>
+                        <div class="btn-notifications">
+                            <img class="icon-round-pink" src="img/ic_help.png" alt="">
+                            <span>Help</span>
+                        </div>
+                        <!-- <button type="button" class="button elevation-4" id="btnLogout">Logout</button> -->
+                    </div>
+
+                </div>
+
+            </div>
+            <img class="img-bottom" src="img/bg_flower_bottom.png" alt="">
 
         </div>
 
@@ -17,6 +72,71 @@
 </template>
 <!-- component styles -->
 <style>
+
+    .settings-layout {
+        position: relative;
+        height: 100%;
+    }
+
+
+    .settings-layout .img-bottom {
+        position: absolute;
+        bottom: 0;
+    }
+
+    .settings-layout .nav-bar{
+        position: initial;
+        background-image: linear-gradient(#db2763, #f5d0c5);
+    }
+
+
+    .settings-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .settings-content {
+        height: 100%;
+    }
+
+    .settings-content-menu {
+        margin: 2rem 1rem;
+        border-radius: 37px;
+        border: 1px solid gray;
+        box-sizing: border-box;
+
+        padding-top: 7px;
+        padding-bottom: 7px;
+
+        font-size: 1rem;
+    }
+
+    .settings-content-menu hr {
+        width: 100%;
+        padding: 0;
+        margin-right: 0;
+    }
+
+    .settings-content-menu > div {
+
+        margin-top: 0.6rem;
+        margin-bottom: 0.6rem;
+
+        margin-left: 22px;
+
+        display: flex;
+        align-items: center;
+    }
+
+    .settings-content-menu img {
+        width: 38px;
+        height: 38px;
+        padding: 6px;
+
+        object-fit: contain;
+
+        margin-right: 0.7rem;
+    }
 
 </style>
 <!-- rest of component data and methods -->
@@ -36,15 +156,19 @@
                 // do something on page init
                 var self = this;
 
-                $("#btnLogout").click(function () {
-
-                    auth.logout(function(){
-
-                        //Refreshes the app (Will go back to map view)
-                        location.reload(true);
-                    });
-
+                $(".back-arrow").click(function (){
+                    appNavigator.onBackPressed();
                 });
+
+                // $("#btnLogout").click(function () {
+                //
+                //     auth.logout(function(){
+                //
+                //         //Refreshes the app (Will go back to map view)
+                //         location.reload(true);
+                //     });
+                //
+                // });
 
             },
             pageAfterOut: function () {

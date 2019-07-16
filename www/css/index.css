@@ -156,7 +156,7 @@ html, body {
 }
 
 .camera-button img {
-    width: 60%;
+    width: 90%;
 }
 
 #btn-register-tree img {
@@ -262,6 +262,12 @@ html, body {
 .bottom-border {
     border-bottom-right-radius: 45px;
     border-bottom-left-radius: 45px;
+}
+
+.icon-round-pink {
+    border: 3px solid #f7b2bd;
+    box-sizing: border-box;
+    border-radius: 50px;
 }
 
 /*  */

@@ -49,6 +49,7 @@ platforms/windows/AppPackages
 
 # Browser
 platforms/browser/www
+platforms/browser/browser.json
 
 # res
 resources/signing
