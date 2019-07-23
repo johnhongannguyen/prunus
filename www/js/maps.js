@@ -25,7 +25,7 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), {
         // center: {lat: -34.397, lng: 150.644},
-        zoom: 12,
+        zoom: 15,
         disableDefaultUI: true,
         mapTypeId: 'roadmap'
     });
@@ -41,6 +41,15 @@ function initMap() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+
+
+            if(TESTING_DEBUG){
+                pos = {
+                    lat: 49.240949,
+                    lng: -123.110678
+                };
+            }
+
 
             var marker = new google.maps.Marker({
                 position: pos,
@@ -88,6 +97,12 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                     lng: position.coords.longitude
                 };
 
+                if(TESTING_DEBUG){
+                    pos = {
+                        lat: 49.240949,
+                        lng: -123.110678
+                    };
+                }
 
                 var marker = new google.maps.Marker({
                     position: pos,
@@ -192,10 +207,10 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 break;
                 case "4":
                 case "5":
-                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-max.png?alt=media&token=4c86ccf0-d974-426e-a725-5c5ff3c85c35";
-                    break;    
+                treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-max.png?alt=media&token=4c86ccf0-d974-426e-a725-5c5ff3c85c35";
+                break;
                 default:
-                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-fav.png?alt=media&token=28361497-c1a7-4f6e-bbee-0bdfa9e49ec4";
+                treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-fav.png?alt=media&token=28361497-c1a7-4f6e-bbee-0bdfa9e49ec4";
 
             }
 

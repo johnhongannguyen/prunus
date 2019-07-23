@@ -1,5 +1,7 @@
 var $$ = Dom7;
 
+const TESTING_DEBUG = false;
+
 
 class Tree {
     constructor(img, lat, lng, address, blooming, rating, user) {

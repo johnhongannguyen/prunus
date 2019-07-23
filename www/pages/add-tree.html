@@ -211,7 +211,15 @@
                 treeLocationService.getAddress(self.tree.lat, self.tree.lng, function(address){
                     self.tree.address = address;
                     $("#tree-address-load").hide();
-                    $("#tree-address").append(address);
+
+                    if(TESTING_DEBUG){
+                        $("#tree-address").append('4600 Cambie St, Vancouver, BC V5Z 2Z1');
+                    } else {
+
+                        $("#tree-address").append(address);
+
+                    }
+
                 });
 
 
@@ -306,13 +314,24 @@
                         //If user is logged save the tree:
                         app.preloader.show();
 
-                        //img, [latlng], address, blooming, rating, user
-                        treeCRUD.write(self.tree.img_url, [self.tree.lat, self.tree.lng], self.tree.address, self.tree.blooming, self.tree.rating, auth.getCurrentUser(), function(){
 
-                            app.preloader.hide();
-                            getTreesAround()
-                            appNavigator.onBackPressed();
-                        });
+                        if(TESTING_DEBUG){
+                            treeCRUD.write(self.tree.img_url, [49.239712, -123.112181], self.tree.address, self.tree.blooming, self.tree.rating, auth.getCurrentUser(), function(){
+                                app.preloader.hide();
+                                getTreesAround()
+                                appNavigator.onBackPressed();
+                            });
+                        } else {
+
+                            //img, [latlng], address, blooming, rating, user
+                            treeCRUD.write(self.tree.img_url, [self.tree.lat, self.tree.lng], self.tree.address, self.tree.blooming, self.tree.rating, auth.getCurrentUser(), function(){
+                                app.preloader.hide();
+                                getTreesAround()
+                                appNavigator.onBackPressed();
+                            });
+
+                        }
+
                     }
 
                 });
