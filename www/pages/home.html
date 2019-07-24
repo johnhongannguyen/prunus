@@ -114,6 +114,12 @@
             correctOrientation: true //Corrects Android orientation quirks
         }
 
+
+        if(TESTING_DEBUG){
+            appNavigator.openPageAddTree("", 49.240949, -123.110678);
+            return;
+        }
+
         navigator.camera.getPicture(function(imageURI) {
 
             //Success:
