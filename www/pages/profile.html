@@ -493,16 +493,23 @@
 
                         console.log(myTrees);
 
-                        if(myTrees.length > 0){
-                            self.myTrees1 = myTrees[0].img_url;
-                        }
+                        if(TESTING_DEBUG){
+                            self.myTrees1 = TESTING_IMG_TREE
+                            self.myTrees2 = TESTING_IMG_TREE
+                            self.myTrees3 = TESTING_IMG_TREE
+                        } else{
 
-                        if(myTrees.length > 1){
-                            self.myTrees2 = myTrees[1].img_url;
-                        }
+                            if(myTrees.length > 0){
+                                self.myTrees1 = myTrees[0].img_url;
+                            }
 
-                        if(myTrees.length > 2){
-                            self.myTrees3 = myTrees[2].img_url;
+                            if(myTrees.length > 1){
+                                self.myTrees2 = myTrees[1].img_url;
+                            }
+
+                            if(myTrees.length > 2){
+                                self.myTrees3 = myTrees[2].img_url;
+                            }
                         }
 
                         self.$setState();
@@ -514,17 +521,27 @@
 
                         console.log(JSON.stringify(favTrees[0].img_url));
 
-                        if(favTrees.length > 0){
-                            self.favTree1 = favTrees[0].img_url;
+                        if(TESTING_DEBUG){
+                            self.favTree1 = TESTING_IMG_TREE
+                            self.favTree2 = TESTING_IMG_TREE
+                            self.favTree3 = TESTING_IMG_TREE
+                        } else{
+
+                            if(favTrees.length > 0){
+                                self.favTree1 = favTrees[0].img_url;
+                            }
+
+                            if(favTrees.length > 1){
+                                self.favTree2 = favTrees[1].img_url;
+                            }
+
+                            if(favTrees.length > 2){
+                                self.favTree3 = favTrees[2].img_url;
+                            }
+
                         }
 
-                        if(favTrees.length > 1){
-                            self.favTree2 = favTrees[1].img_url;
-                        }
 
-                        if(favTrees.length > 2){
-                            self.favTree3 = favTrees[2].img_url;
-                        }
 
                         self.$setState();
                     }

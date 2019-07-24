@@ -1,6 +1,7 @@
 var $$ = Dom7;
 
 const TESTING_DEBUG = true;
+const TESTING_IMG_TREE = 'https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/images%2F5584335694_009d612b26_b.jpg?alt=media&token=72c855fd-8c03-4920-8749-d305dc5a632a';
 
 
 class Tree {
@@ -38,7 +39,7 @@ var appNavigator = {
         if(TESTING_DEBUG){
             var options = {
                 context: {
-                    tree: new Tree('https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/images%2F5584335694_009d612b26_b.jpg?alt=media&token=72c855fd-8c03-4920-8749-d305dc5a632a', lat, lng),
+                    tree: new Tree(TESTING_IMG_TREE, lat, lng),
                 }
             };
         } else {

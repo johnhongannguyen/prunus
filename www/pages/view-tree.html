@@ -171,6 +171,12 @@
 
                 treeCRUD.read(id, auth.getCurrentUser(), function(result, isFavorite) {
                     self.tree = result;    //Updating tree object
+
+                    if(TESTING_DEBUG){
+                        self.tree.img_url = TESTING_IMG_TREE
+                    }
+
+
                     self.$setState();      //Forcing the view to reset
 
                     //Setting the value to the slider:
@@ -194,32 +200,32 @@
 
                     if(auth.getCurrentUser()) {
                         $(".favorite").load("custom/favorite/custom-favorite.html", function() {
-                        $('custom-favorite').val(isFavorite ? 1 : 0);
+                            $('custom-favorite').val(isFavorite ? 1 : 0);
 
-                        $('custom-favorite').on('heart', () => {
-                            console.log("new value..");
-                            //new value assigned:
-                            self.favorite = Boolean(parseInt($('custom-favorite').val()));
-                            console.log("Favorite: " + self.favorite)
-                            console.log("...done!");
+                            $('custom-favorite').on('heart', () => {
+                                console.log("new value..");
+                                //new value assigned:
+                                self.favorite = Boolean(parseInt($('custom-favorite').val()));
+                                console.log("Favorite: " + self.favorite)
+                                console.log("...done!");
 
-                            if (self.favorite) {
-                                //Add tree to the user's list of favorites
-                                userCRUD.addTreeToFavorites(auth.getCurrentUser(), id, self.tree, function() {
+                                if (self.favorite) {
+                                    //Add tree to the user's list of favorites
+                                    userCRUD.addTreeToFavorites(auth.getCurrentUser(), id, self.tree, function() {
 
-                                })
-                            } else {
-                                //Remove tree from the user's list of favorites
-                                userCRUD.removeTreeFromFavorites(auth.getCurrentUser(), id, function() {
+                                    })
+                                } else {
+                                    //Remove tree from the user's list of favorites
+                                    userCRUD.removeTreeFromFavorites(auth.getCurrentUser(), id, function() {
 
-                                })
-                            }
+                                    })
+                                }
 
-                            getTreesAround()
+                                getTreesAround()
+                            });
                         });
-                    });
                     }
-                    
+
 
 
                 });
