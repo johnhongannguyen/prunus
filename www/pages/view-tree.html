@@ -12,6 +12,10 @@
 
                     <div class="background">
                         <img id="back-arrow" src="img/ic_back.png" alt="Back">
+                        <span class="field input-section fav">
+                            <span class="favorite">
+                            </span>
+                        </span>
                         <img id="img-tree" src="{{tree.img_url}}">
                     </div>
 
@@ -20,9 +24,11 @@
 
                             <img src="img/pin-flower-shadow.png" alt="Pin Flower" class="pin-flower">
 
-                            <div class="field input-section">
-                                <div class="favorite">
-                                    <!-- custom-favorite element will go here -->
+                            <!-- BLOOM -->
+                            <div class="field input-section input-section-bloom">
+                                <!-- <div id="title-bloom" class="section-title">BLOOM</div> -->
+                                <div class="bloom">
+                                    <!-- custom-bloom element will go here -->
                                 </div>
                             </div>
 
@@ -36,18 +42,6 @@
                                 <!-- <div class="section-title">RATING</div> -->
                                 <div class="rating">
                                     <!-- custom-rating element will go here -->
-                                </div>
-                            </div>
-
-                            <div class="hr-wrapper">
-                                <img class="hr" src="img/hr.png" alt="hr">
-                            </div>
-
-                            <!-- BLOOM -->
-                            <div class="field input-section input-section-bloom">
-                                <!-- <div id="title-bloom" class="section-title">BLOOM</div> -->
-                                <div class="bloom">
-                                    <!-- custom-bloom element will go here -->
                                 </div>
                             </div>
 
@@ -198,7 +192,8 @@
                         $('custom-bloom').prop('enabled', false);
                     });
 
-                    $(".favorite").load("custom/favorite/custom-favorite.html", function() {
+                    if(auth.getCurrentUser()) {
+                        $(".favorite").load("custom/favorite/custom-favorite.html", function() {
                         $('custom-favorite').val(isFavorite ? 1 : 0);
 
                         $('custom-favorite').on('heart', () => {
@@ -223,6 +218,8 @@
                             getTreesAround()
                         });
                     });
+                    }
+                    
 
 
                 });
