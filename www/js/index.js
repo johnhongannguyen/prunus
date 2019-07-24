@@ -1,6 +1,6 @@
 var $$ = Dom7;
 
-const TESTING_DEBUG = false;
+const TESTING_DEBUG = true;
 
 
 class Tree {
@@ -34,11 +34,21 @@ var appNavigator = {
 
     openPageAddTree: function(src, lat, lng) {
 
-        var options = {
-            context: {
-                tree: new Tree(src, lat, lng),
-            }
-        };
+
+        if(TESTING_DEBUG){
+            var options = {
+                context: {
+                    tree: new Tree('https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/images%2F5584335694_009d612b26_b.jpg?alt=media&token=72c855fd-8c03-4920-8749-d305dc5a632a', lat, lng),
+                }
+            };
+        } else {
+            var options = {
+                context: {
+                    tree: new Tree(src, lat, lng),
+                }
+            };
+        }
+
 
         mainView.router.navigate('/add-tree/', options);
 
