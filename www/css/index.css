@@ -134,15 +134,22 @@ html, body {
     -webkit-filter: drop-shadow(3px 3px 3px rgba(0,0,0,0.5));
 }
 
+/* This targets only view and add tree */
+.background #back-arrow {
+    margin-top: 2px;
+}
+
 .input-section.fav {
+    /* margin-right: 8px;
+    margin-top: 8px; */
     position: absolute;
     top: 0;
     right: 0;
     min-height: 40px;
     max-height: 40px;
     width: auto;
-    padding: 5px;
-    -webkit-filter: drop-shadow(3px 3px 3px rgba(0,0,0,0.5));
+    padding: 7px;
+    /* -webkit-filter: drop-shadow(3px 3px 3px rgba(0,0,0,0.5)); */
 }
 
 .camera-button, #btn-register-tree {
