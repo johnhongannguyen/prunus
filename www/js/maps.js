@@ -199,11 +199,23 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         var treeIcon;
         treeCRUD.readBloom(key, function(tree, isFavorite) {
 
+
+            var star = true;
+
+
             switch (tree.blooming) {
                 case "1":
 
                 if(isFavorite){
-                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic-tree-pin-bloom-low-fav.png?alt=media&token=0df73a3a-ed9b-40a2-b31f-26d1aac7dccb";
+
+
+                    if(star){
+                        treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic_low.png?alt=media&token=a77768fa-7ee2-47d9-8f72-ca68c13cea2c";
+                    } else{
+                        treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic-tree-pin-bloom-low-fav.png?alt=media&token=0df73a3a-ed9b-40a2-b31f-26d1aac7dccb";
+                    }
+
+
                 } else{
                     treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-min.png?alt=media&token=1aefd682-d90c-4aba-99ff-892f7569b994";
                 }
@@ -214,7 +226,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 case "3":
 
                 if(isFavorite){
-                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic-tree-pin-bloom-med-fav.png?alt=media&token=cb7c8f34-9155-4c4e-9b2a-7928e3be9bb4";
+
+                    if(star){
+                        treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic_med.png?alt=media&token=22ee7226-4425-42e4-8c02-29f39a33a688";
+                    } else{
+                        treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic-tree-pin-bloom-med-fav.png?alt=media&token=cb7c8f34-9155-4c4e-9b2a-7928e3be9bb4";
+                    }
+
                 } else{
                     treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-mid.png?alt=media&token=038dfc8d-a99d-41bf-b2a4-bafa10bc50fa";
                 }
@@ -224,7 +242,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                 case "5":
 
                 if(isFavorite){
-                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic-tree-pin-bloom-max-fav.png?alt=media&token=4d632a17-873f-4461-9e84-a0d5342cf0a2";
+
+                    if(star){
+                        treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic_max.png?alt=media&token=d031a303-d71d-4f74-860a-2122904e2c21";
+                    } else{
+                        treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic-tree-pin-bloom-max-fav.png?alt=media&token=4d632a17-873f-4461-9e84-a0d5342cf0a2";
+                    }
+
                 } else{
                     treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-max.png?alt=media&token=4c86ccf0-d974-426e-a725-5c5ff3c85c35";
                 }
