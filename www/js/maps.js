@@ -162,6 +162,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
                 //remember to cancel this geoQuery later
                 geoQuery = treeLocationService.listenToNearbyTrees(
+
                     [pos.lat, pos.lng],
 
                     function(key, location, distance) {
@@ -196,21 +197,42 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     function addMarker(key, location) {
 
         var treeIcon;
-        treeCRUD.readBloom(key, function(bloom) {
-            switch (bloom) {
+        treeCRUD.readBloom(key, function(tree, isFavorite) {
+
+            switch (tree.blooming) {
                 case "1":
-                treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-min.png?alt=media&token=1aefd682-d90c-4aba-99ff-892f7569b994";
+
+                if(isFavorite){
+                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic-tree-pin-bloom-low-fav.png?alt=media&token=0df73a3a-ed9b-40a2-b31f-26d1aac7dccb";
+                } else{
+                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-min.png?alt=media&token=1aefd682-d90c-4aba-99ff-892f7569b994";
+                }
+
+
                 break;
                 case "2":
                 case "3":
-                treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-mid.png?alt=media&token=038dfc8d-a99d-41bf-b2a4-bafa10bc50fa";
+
+                if(isFavorite){
+                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic-tree-pin-bloom-med-fav.png?alt=media&token=cb7c8f34-9155-4c4e-9b2a-7928e3be9bb4";
+                } else{
+                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-mid.png?alt=media&token=038dfc8d-a99d-41bf-b2a4-bafa10bc50fa";
+                }
+
                 break;
                 case "4":
                 case "5":
-                treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-max.png?alt=media&token=4c86ccf0-d974-426e-a725-5c5ff3c85c35";
+
+                if(isFavorite){
+                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Ftrees_icons%2Fic-tree-pin-bloom-max-fav.png?alt=media&token=4d632a17-873f-4461-9e84-a0d5342cf0a2";
+                } else{
+                    treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-max.png?alt=media&token=4c86ccf0-d974-426e-a725-5c5ff3c85c35";
+                }
+
                 break;
                 default:
-                treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-fav.png?alt=media&token=28361497-c1a7-4f6e-bbee-0bdfa9e49ec4";
+                treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-bloom-min.png?alt=media&token=1aefd682-d90c-4aba-99ff-892f7569b994";
+                // treeIcon = "https://firebasestorage.googleapis.com/v0/b/prunus-8d0a2.appspot.com/o/icons%2Fic-tree-pin-fav.png?alt=media&token=28361497-c1a7-4f6e-bbee-0bdfa9e49ec4";
 
             }
 
