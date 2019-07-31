@@ -14,6 +14,9 @@
     <platform name="android">
         <splash density="port-mdpi" src="www/res/screen/android/splash.png" />
     </platform>
+
+    <icon src="www/res/icon.png" />
+
     <platform name="ios">
         <icon height="57" platform="ios" src="www/res/icon/ios/icon.png" width="57" />
         <icon height="114" platform="ios" src="www/res/icon/ios/icon@2x.png" width="114" />
